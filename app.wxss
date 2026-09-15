@@ -1,0 +1,306 @@
+/**app.wxss 全局设计变量与通用样式 ——「游罗店」配色体系
+ *
+ * 主色    黛瓦青    #2E6E6B   导航、主按钮、图标、选中态
+ * 背景    宣纸米白  #F8F5EE   页面底色
+ * 卡片    纯白      #FFFFFF   内容卡片、列表
+ * 强调    罗店金    #C8A24A   标题装饰、非遗标签、重点数据
+ * 点缀    龙船红    #C34A3A   活动入口、角标
+ * 辅助    美兰湖蓝  #6C9BC0   美兰湖、亲水场景
+ * 辅助    花神粉    #E9A6B0   花神节、春日民俗
+ * 辅助    生态绿    #7FA76A   乡村、生态板块
+ * 木色               #8B6F47   古镇老街质感
+ */
+page {
+  --primary: #2E6E6B;
+  --primary-soft: #E7F1EF;
+  --gold: #C8A24A;
+  /* 罗店金加深版：用于白底上的金色文字，保证对比度 ≥ 4.5:1
+     标准罗店金只用于装饰性元素（短线、图标、描边、色块） */
+  --gold-deep: #A8862F;
+  --gold-soft: #F7F0DE;
+  --red: #C34A3A;
+  --red-soft: #FAE9E5;
+  --blue: #6C9BC0;
+  --blue-soft: #EAF1F7;
+  --pink: #E9A6B0;
+  --pink-soft: #FCEDEF;
+  --green: #7FA76A;
+  --green-soft: #EFF4E9;
+  --wood: #8B6F47;
+  --text-1: #263238;
+  --text-2: #6B7280;
+  --text-3: #9AA1A9;
+  --line: #ECE7DC;
+  --bg: #F8F5EE;
+  --card: #FFFFFF;
+  --shadow: 0 8rpx 24rpx rgba(38, 50, 56, 0.06);
+
+  background: var(--bg);
+  color: var(--text-1);
+  font-size: 28rpx;
+  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+view,
+text,
+scroll-view,
+image,
+button,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+button::after {
+  border: none;
+}
+
+/* ---------- 布局 ---------- */
+.wrap {
+  padding: 0 24rpx;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 24rpx;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.between {
+  justify-content: space-between;
+}
+
+.center {
+  justify-content: center;
+}
+
+.flex1 {
+  flex: 1;
+  min-width: 0;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* ---------- 区块标题（金色短线装饰） ---------- */
+.sec {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 40rpx 24rpx 20rpx;
+}
+
+.sec-t {
+  font-size: 34rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.sec-t::before {
+  content: '';
+  display: inline-block;
+  width: 8rpx;
+  height: 28rpx;
+  border-radius: 4rpx;
+  background: var(--gold);
+  margin-right: 14rpx;
+  vertical-align: -3rpx;
+}
+
+.sec-more {
+  font-size: 24rpx;
+  color: var(--text-3);
+}
+
+/* ---------- 渐变占位图（替代图片资源，可按需换成 image） ---------- */
+.ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 56rpx;
+  line-height: 1;
+}
+
+/* 1 龙船红 · 2 生态绿 · 3 罗店金 · 4 美兰湖蓝 · 5 花神粉 · 6 黛瓦青 */
+.ph-1 { background: linear-gradient(135deg, #D98A7C, #C34A3A); }
+.ph-2 { background: linear-gradient(135deg, #A8C79A, #7FA76A); }
+.ph-3 { background: linear-gradient(135deg, #E3C77E, #C8A24A); }
+.ph-4 { background: linear-gradient(135deg, #A7C4DA, #6C9BC0); }
+.ph-5 { background: linear-gradient(135deg, #F3C6CD, #E9A6B0); }
+.ph-6 { background: linear-gradient(135deg, #8FB8B5, #2E6E6B); }
+
+/* ---------- 标签 ---------- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 36rpx;
+  padding: 0 14rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+.tag-gold {
+  background: var(--gold-soft);
+  color: var(--gold-deep);
+}
+
+.tag-red {
+  background: var(--red-soft);
+  color: var(--red);
+}
+
+.tag-blue {
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.tag-pink {
+  background: var(--pink-soft);
+  color: #C97D89;
+}
+
+.tag-green {
+  background: var(--green-soft);
+  color: var(--green);
+}
+
+.tag-line {
+  background: transparent;
+  border: 2rpx solid var(--line);
+  color: var(--text-2);
+}
+
+/* ---------- 价格 ---------- */
+.price {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.price-sym {
+  font-size: 22rpx;
+}
+
+.price-num {
+  font-size: 38rpx;
+}
+
+.price-old {
+  font-size: 22rpx;
+  color: var(--text-3);
+  text-decoration: line-through;
+  margin-left: 10rpx;
+  font-weight: 400;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 84rpx;
+  border-radius: 42rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  padding: 0 40rpx;
+  line-height: 1;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-red {
+  background: var(--red);
+  color: #fff;
+}
+
+.btn-green {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-plain {
+  background: #fff;
+  color: var(--primary);
+  border: 2rpx solid var(--primary);
+}
+
+.btn-plain-grey {
+  background: #fff;
+  color: var(--text-2);
+  border: 2rpx solid var(--line);
+}
+
+.btn-disabled {
+  background: #D8D3C8 !important;
+  color: #fff !important;
+}
+
+.btn-sm {
+  height: 60rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  padding: 0 28rpx;
+}
+
+/* ---------- 底部固定操作栏 ---------- */
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -6rpx 24rpx rgba(38, 50, 56, 0.07);
+}
+
+.has-bottom {
+  padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
+}
+
+/* ---------- 空状态 ---------- */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 160rpx 0;
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+.empty-icon {
+  font-size: 100rpx;
+  line-height: 1;
+  margin-bottom: 24rpx;
+}

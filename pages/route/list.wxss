@@ -1,0 +1,150 @@
+/* pages/route/list.wxss */
+.banner-tip {
+  position: relative;
+  margin: 24rpx 24rpx 0;
+  padding: 32rpx 30rpx;
+  border-radius: 24rpx;
+  background: #2E6E6B;
+  color: #fff;
+  overflow: hidden;
+}
+
+.banner-tip::after {
+  content: '🚩';
+  position: absolute;
+  right: -10rpx;
+  bottom: -30rpx;
+  font-size: 160rpx;
+  opacity: 0.16;
+}
+
+.tip-t {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.tip-s {
+  font-size: 24rpx;
+  opacity: 0.88;
+  margin: 10rpx 0 22rpx;
+}
+
+.banner-tip .btn-primary {
+  background: #fff;
+  color: var(--primary);
+  display: inline-flex;
+}
+
+.chips {
+  margin-top: 26rpx;
+  white-space: nowrap;
+}
+
+.chips-inner {
+  display: inline-flex;
+  padding: 0 24rpx;
+}
+
+.chip {
+  flex-shrink: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 30rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  color: var(--text-2);
+  font-size: 26rpx;
+  margin-right: 16rpx;
+}
+
+.chip-on {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.route {
+  display: flex;
+  padding: 22rpx;
+  margin: 20rpx 0 0;
+}
+
+.route-cover {
+  position: relative;
+  width: 190rpx;
+  height: 320rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+  flex-direction: column;
+}
+
+.route-emoji {
+  font-size: 84rpx;
+  line-height: 1;
+}
+
+.route-days {
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 20rpx;
+  padding: 2rpx 16rpx;
+}
+
+.route-body {
+  flex: 1;
+  min-width: 0;
+  padding-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.route-name {
+  font-size: 33rpx;
+  font-weight: 700;
+}
+
+.route-sum {
+  font-size: 23rpx;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 10rpx 0 14rpx;
+}
+
+.route-meta {
+  flex: 1;
+}
+
+.meta-row {
+  display: flex;
+  margin-bottom: 8rpx;
+}
+
+.meta-k {
+  width: 120rpx;
+  flex-shrink: 0;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+
+.meta-v {
+  flex: 1;
+  font-size: 22rpx;
+  color: var(--text-2);
+}
+
+.route-tag {
+  margin: 0 12rpx 8rpx 0;
+}
+
+.bar-info-t {
+  font-size: 27rpx;
+  font-weight: 600;
+}
+
+.bar-info-s {
+  font-size: 21rpx;
+  color: var(--text-3);
+  margin-top: 4rpx;
+}

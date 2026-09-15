@@ -1,0 +1,92 @@
+<!--pages/order/list.wxml-->
+<view class="page">
+  <view class="tabs">
+    <view
+      class="tab {{active === item.key ? 'tab-on' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      bindtap="onTabTap"
+      data-key="{{item.key}}"
+    >{{item.name}}</view>
+  </view>
+
+  <view class="wrap">
+    <view class="order card" wx:for="{{list}}" wx:key="id">
+      <view class="order-head">
+        <text class="order-no" bindtap="copyOrderId" data-id="{{item.id}}">订单号：{{item.id}}</text>
+        <text class="order-status status-{{item.status}}">{{item.statusText}}</text>
+      </view>
+
+      <view class="order-goods" wx:for="{{item.items}}" wx:for-item="g" wx:key="key">
+        <view class="g-ico ph ph-{{g.theme}}">{{g.emoji}}</view>
+        <view class="flex1">
+          <view class="g-name ellipsis">{{g.name}}</view>
+          <view class="g-spec ellipsis">{{g.spec}}</view>
+        </view>
+        <view class="g-right">
+          <view class="price"><text class="price-sym">¥</text><text class="price-num">{{g.price}}</text></view>
+          <view class="g-qty">×{{g.qty}}</view>
+        </view>
+      </view>
+
+      <view class="order-info">
+        <view class="info-line">
+          <text class="info-k">收货人</text>
+          <text class="info-v flex1">{{item.address.name}} {{item.address.phone}}</text>
+        </view>
+        <view class="info-line">
+          <text class="info-k">收货地址</text>
+          <text class="info-v flex1">{{item.address.detail}}</text>
+        </view>
+        <view class="info-line" wx:if="{{item.remark}}">
+          <text class="info-k">备注</text>
+          <text class="info-v flex1">{{item.remark}}</text>
+        </view>
+        <view class="info-line">
+          <text class="info-k">下单时间</text>
+          <text class="info-v flex1">{{item.createdAt}}</text>
+        </view>
+      </view>
+
+      <view class="order-foot">
+        <view class="order-total flex1">
+          <text class="total-k">共 {{item.items.length}} 种商品 · 合计</text>
+          <view class="price"><text class="price-sym">¥</text><text class="price-num">{{item.total}}</text></view>
+        </view>
+        <view class="acts">
+          <view class="btn btn-plain-grey btn-sm" bindtap="callService">联系客服</view>
+          <view
+            class="btn btn-plain-grey btn-sm"
+            wx:if="{{item.status === 'unpaid'}}"
+            bindtap="cancel"
+            data-id="{{item.id}}"
+          >取消订单</view>
+          <view
+            class="btn btn-plain-grey btn-sm"
+            wx:if="{{item.status === 'done' || item.status === 'cancelled'}}"
+            bindtap="remove"
+            data-id="{{item.id}}"
+          >删除</view>
+          <view
+            class="btn btn-primary btn-sm"
+            wx:if="{{item.status === 'unpaid'}}"
+            bindtap="pay"
+            data-id="{{item.id}}"
+          >立即支付</view>
+          <view
+            class="btn btn-primary btn-sm"
+            wx:if="{{item.status === 'paid'}}"
+            bindtap="confirmReceive"
+            data-id="{{item.id}}"
+          >确认收货</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{list.length === 0}}">
+      <view class="empty-icon">📦</view>
+      <view>还没有相关订单</view>
+      <view class="btn btn-primary" style="margin-top: 40rpx;" bindtap="goShopping">去逛逛农产品</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,162 @@
+/* pages/order/confirm.wxss */
+.block {
+  margin-top: 20rpx;
+  padding: 26rpx 24rpx;
+}
+
+.block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.block-title {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.block-tip {
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.field-last {
+  border-bottom: none;
+  align-items: flex-start;
+}
+
+.field-k {
+  width: 150rpx;
+  flex-shrink: 0;
+  font-size: 26rpx;
+  color: var(--text-2);
+}
+
+.field-input {
+  flex: 1;
+  font-size: 27rpx;
+}
+
+.field-textarea {
+  flex: 1;
+  font-size: 27rpx;
+  min-height: 80rpx;
+  width: auto;
+  line-height: 1.6;
+}
+
+.field-ph {
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+.remark {
+  width: 100%;
+  min-height: 110rpx;
+  font-size: 26rpx;
+  line-height: 1.6;
+}
+
+/* ---------- 商品 ---------- */
+.goods {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 0;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.goods:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.goods-ico {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  font-size: 48rpx;
+}
+
+.goods-name {
+  font-size: 27rpx;
+  font-weight: 600;
+}
+
+.goods-spec {
+  font-size: 22rpx;
+  color: var(--text-3);
+  margin-top: 8rpx;
+}
+
+.goods-right {
+  text-align: right;
+  flex-shrink: 0;
+  padding-left: 16rpx;
+}
+
+.goods-qty {
+  font-size: 22rpx;
+  color: var(--text-3);
+  margin-top: 6rpx;
+}
+
+/* ---------- 金额 ---------- */
+.amount-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14rpx 0;
+  font-size: 26rpx;
+}
+
+.amount-k {
+  color: var(--text-2);
+}
+
+.amount-v {
+  color: var(--text-1);
+  font-size: 25rpx;
+}
+
+.amount-total {
+  margin-top: 10rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid var(--line);
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.notice {
+  margin: 24rpx 24rpx 0;
+  font-size: 22rpx;
+  color: var(--text-3);
+  line-height: 1.7;
+}
+
+/* ---------- 底部 ---------- */
+.bar-total {
+  display: flex;
+  align-items: baseline;
+}
+
+.bar-k {
+  font-size: 24rpx;
+  color: var(--text-2);
+  margin-right: 10rpx;
+}
+
+.bar-service {
+  font-size: 25rpx;
+  color: var(--text-2);
+  padding: 0 22rpx;
+}

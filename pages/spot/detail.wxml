@@ -1,0 +1,175 @@
+<!--pages/spot/detail.wxml-->
+<view class="page has-bottom" wx:if="{{spot}}">
+
+  <!-- 封面 -->
+  <view class="cover ph ph-{{spot.theme}}">
+    <view class="cover-emoji">{{spot.emoji}}</view>
+    <view class="cover-mask"></view>
+    <view class="cover-text">
+      <view class="cover-name">{{spot.name}}</view>
+      <view class="cover-town">📍 {{spot.town}}</view>
+      <view class="cover-tags row">
+        <text class="tag cover-tag" wx:for="{{spot.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 概览 -->
+  <view class="card overview">
+    <view class="ov-item">
+      <view class="ov-num">★ {{spot.rating}}</view>
+      <view class="ov-lbl">游客评分</view>
+    </view>
+    <view class="ov-line"></view>
+    <view class="ov-item">
+      <view class="ov-num">{{spot.category}}</view>
+      <view class="ov-lbl">景点类型</view>
+    </view>
+    <view class="ov-line"></view>
+    <view class="ov-item">
+      <view class="ov-num small">{{spot.level}}</view>
+      <view class="ov-lbl">景区等级</view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-title">基本信息</view>
+      <view class="info-row">
+        <text class="info-k">地　址</text>
+        <text class="info-v flex1">{{spot.address}}</text>
+        <text class="info-act" bindtap="copyAddress">复制</text>
+      </view>
+      <view class="info-row">
+        <text class="info-k">开放时间</text>
+        <text class="info-v flex1">{{spot.openTime}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-k">门票参考</text>
+        <text class="info-v flex1">{{spot.ticket}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-k">建议游玩</text>
+        <text class="info-v flex1">{{spot.duration}}</text>
+      </view>
+      <view class="info-row">
+        <text class="info-k">咨询电话</text>
+        <text class="info-v flex1">{{spot.phone}}</text>
+        <text class="info-act" bindtap="callSpot">呼叫</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 景点介绍 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-title">景点介绍</view>
+      <view class="paragraph">{{spot.intro}}</view>
+    </view>
+  </view>
+
+  <!-- 特色亮点 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-title">特色亮点</view>
+      <view class="point" wx:for="{{spot.highlights}}" wx:key="*this">
+        <text class="point-ico">✦</text>
+        <text class="point-txt">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 游玩贴士 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-title">游玩贴士</view>
+      <view class="tip" wx:for="{{spot.tips}}" wx:key="*this">
+        <text class="tip-ico">💡</text>
+        <text class="tip-txt">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 本地美食 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-title">可以尝尝</view>
+      <view class="row" style="flex-wrap: wrap;">
+        <text class="tag tag-gold food-tag" wx:for="{{spot.foods}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 推荐路线 -->
+  <block wx:if="{{relatedRoutes.length > 0}}">
+    <view class="sec">
+      <view class="sec-t">包含该景点的路线</view>
+    </view>
+    <view class="wrap">
+      <view
+        class="route card"
+        wx:for="{{relatedRoutes}}"
+        wx:key="id"
+        bindtap="goRoute"
+        data-id="{{item.id}}"
+      >
+        <view class="route-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+        <view class="flex1">
+          <view class="row between">
+            <text class="route-name ellipsis">{{item.name}}</text>
+            <text class="route-days">{{item.days}}日</text>
+          </view>
+          <view class="route-sum ellipsis-2">{{item.summary}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 周边同类景点 -->
+  <block wx:if="{{nearby.length > 0}}">
+    <view class="sec">
+      <view class="sec-t">周边同类景点</view>
+    </view>
+    <view class="wrap grid">
+      <view
+        class="mini card"
+        wx:for="{{nearby}}"
+        wx:key="id"
+        bindtap="goSpot"
+        data-id="{{item.id}}"
+      >
+        <view class="mini-cover ph ph-{{item.theme}}">{{item.emoji}}</view>
+        <view class="mini-name ellipsis">{{item.name}}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 顺路带手信 -->
+  <view class="sec">
+    <view class="sec-t">顺路带点罗店好物</view>
+  </view>
+  <view class="wrap">
+    <view class="goods-row card" wx:for="{{relatedProducts}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
+      <view class="goods-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="flex1">
+        <view class="goods-name ellipsis">{{item.name}}</view>
+        <view class="goods-desc ellipsis">{{item.origin}}</view>
+      </view>
+      <view class="price"><text class="price-sym">¥</text><text class="price-num">{{item.price}}</text></view>
+    </view>
+  </view>
+
+  <!-- 底部操作 -->
+  <view class="bottom-bar">
+    <view class="bar-btn" bindtap="callSpot">
+      <text class="bar-ico">☎️</text>
+      <text class="bar-txt">咨询</text>
+    </view>
+    <view class="bar-btn" bindtap="goPlan">
+      <text class="bar-ico">🧭</text>
+      <text class="bar-txt">规划</text>
+    </view>
+    <view class="btn btn-primary flex1" bindtap="openMap" style="margin-left: 16rpx;">导航前往</view>
+  </view>
+</view>

@@ -1,0 +1,114 @@
+<!--pages/plan/plan.wxml-->
+<view class="page">
+
+  <view class="intro">
+    <view class="intro-t">三步生成你的专属行程</view>
+    <view class="intro-s">系统会根据天数、偏好与同行人群，自动排出每天的时间安排</view>
+  </view>
+
+  <!-- 步骤1 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="step-title"><text class="step-no">1</text>打算玩几天</view>
+      <view class="row opts">
+        <view
+          class="opt {{days === item ? 'opt-on' : ''}}"
+          wx:for="{{dayOptions}}"
+          wx:key="*this"
+          bindtap="onDayTap"
+          data-value="{{item}}"
+        >{{item}} 天</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤2 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="step-title">
+        <text class="step-no">2</text>感兴趣的主题
+        <text class="step-sub">可多选，不选则系统推荐</text>
+      </view>
+      <view class="pref-grid">
+        <view
+          class="pref {{prefMap[item.key] ? 'pref-on' : ''}}"
+          wx:for="{{prefOptions}}"
+          wx:key="key"
+          bindtap="onPrefTap"
+          data-key="{{item.key}}"
+        >
+          <text class="pref-ico">{{item.icon}}</text>
+          <text class="pref-name">{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 步骤3 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="step-title"><text class="step-no">3</text>和谁一起出行</view>
+      <view
+        class="group {{group === item.key ? 'group-on' : ''}}"
+        wx:for="{{groupOptions}}"
+        wx:key="key"
+        bindtap="onGroupTap"
+        data-key="{{item.key}}"
+      >
+        <view class="group-radio"><view class="group-radio-in" wx:if="{{group === item.key}}"></view></view>
+        <view class="flex1">
+          <view class="group-name">{{item.name}}</view>
+          <view class="group-desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="wrap actions">
+    <view class="btn btn-primary flex1" bindtap="buildPlan">生成我的行程</view>
+    <view class="btn btn-plain-grey" bindtap="reset">重置</view>
+  </view>
+
+  <!-- 结果 -->
+  <block wx:if="{{generated}}">
+    <view id="plan-result" class="sec">
+      <view class="sec-t">为你规划的行程</view>
+      <view class="sec-more">共 {{totalSpot}} 个景点</view>
+    </view>
+
+    <view class="wrap">
+      <view class="day card" wx:for="{{plan}}" wx:for-item="day" wx:key="day">
+        <view class="day-head">
+          <view class="day-badge">D{{day.day}}</view>
+          <view class="day-title">{{day.title}}</view>
+        </view>
+
+        <view class="tl-item" wx:for="{{day.items}}" wx:for-item="it" wx:key="time">
+          <view class="tl-time">{{it.time}}</view>
+          <view class="tl-card" bindtap="goSpot" data-id="{{it.spot.id}}">
+            <view class="tl-ico ph ph-{{it.spot.theme}}">{{it.spot.emoji}}</view>
+            <view class="flex1">
+              <view class="tl-name ellipsis">{{it.spot.name}}</view>
+              <view class="tl-meta ellipsis">{{it.spot.town}} · {{it.spot.category}}</view>
+            </view>
+            <view
+              class="tl-nav"
+              catchtap="openMap"
+              data-lat="{{it.spot.lat}}"
+              data-lng="{{it.spot.lng}}"
+              data-title="{{it.spot.name}}"
+              data-town="{{it.spot.address}}"
+            >导航</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="row actions">
+        <view class="btn btn-plain flex1" bindtap="regenerate">换一版</view>
+        <view class="btn btn-primary flex1" bindtap="copyPlan" style="margin-left: 20rpx;">复制行程</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="footer">行程由系统按偏好自动生成，实际出行请结合天气与景区公告调整</view>
+</view>

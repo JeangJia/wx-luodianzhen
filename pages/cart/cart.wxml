@@ -1,0 +1,60 @@
+<!--pages/cart/cart.wxml-->
+<view class="page {{list.length ? 'has-bottom' : ''}}">
+
+  <block wx:if="{{list.length > 0}}">
+    <view class="head-bar">
+      <text class="head-title">共 {{list.length}} 种商品</text>
+      <text class="head-clear" bindtap="clearAll">清空购物车</text>
+    </view>
+
+    <view class="wrap">
+      <view class="item card" wx:for="{{list}}" wx:key="key">
+        <view class="check" bindtap="onCheck" data-key="{{item.key}}">
+          <view class="check-box {{item.checked ? 'check-on' : ''}}">
+            <text wx:if="{{item.checked}}">✓</text>
+          </view>
+        </view>
+
+        <view class="item-ico ph ph-{{item.theme}}" bindtap="goDetail" data-id="{{item.id}}">{{item.emoji}}</view>
+
+        <view class="item-body flex1">
+          <view class="row between">
+            <text class="item-name ellipsis" bindtap="goDetail" data-id="{{item.id}}">{{item.name}}</text>
+            <text class="item-del" bindtap="onRemove" data-key="{{item.key}}">✕</text>
+          </view>
+          <view class="item-spec ellipsis">{{item.spec}}</view>
+          <view class="row between item-foot">
+            <view class="price">
+              <text class="price-sym">¥</text><text class="price-num">{{item.price}}</text>
+            </view>
+            <view class="stepper">
+              <view class="step-btn {{item.qty <= 1 ? 'step-dis' : ''}}" bindtap="minus" data-key="{{item.key}}">−</view>
+              <view class="step-num">{{item.qty}}</view>
+              <view class="step-btn" bindtap="plus" data-key="{{item.key}}">＋</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom-bar">
+      <view class="check-all" bindtap="onCheckAll">
+        <view class="check-box {{allChecked ? 'check-on' : ''}}">
+          <text wx:if="{{allChecked}}">✓</text>
+        </view>
+        <text class="check-all-txt">全选</text>
+      </view>
+      <view class="total flex1">
+        <text class="total-lbl">合计</text>
+        <view class="price"><text class="price-sym">¥</text><text class="price-num">{{amount}}</text></view>
+      </view>
+      <view class="btn btn-primary" bindtap="checkout">结算({{num}})</view>
+    </view>
+  </block>
+
+  <view class="empty" wx:else>
+    <view class="empty-icon">🧺</view>
+    <view>购物车还是空的</view>
+    <view class="btn btn-primary" style="margin-top: 40rpx;" bindtap="goShopping">去逛逛农产品</view>
+  </view>
+</view>

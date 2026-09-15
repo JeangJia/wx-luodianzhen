@@ -1,0 +1,158 @@
+/* pages/spot/list.wxss */
+.search-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  padding: 20rpx 0 8rpx;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  height: 76rpx;
+  margin: 0 24rpx;
+  padding: 0 24rpx;
+  border-radius: 38rpx;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.search-ico {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 27rpx;
+}
+
+.search-ph {
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+.search-clear {
+  font-size: 26rpx;
+  color: var(--text-3);
+  padding-left: 16rpx;
+}
+
+.chips {
+  margin-top: 18rpx;
+  white-space: nowrap;
+}
+
+.chips-inner {
+  display: inline-flex;
+  padding: 0 24rpx;
+}
+
+.chip {
+  flex-shrink: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 30rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  color: var(--text-2);
+  font-size: 26rpx;
+  margin-right: 16rpx;
+}
+
+.chip-on {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.count {
+  font-size: 23rpx;
+  color: var(--text-3);
+  padding: 18rpx 0 14rpx;
+}
+
+.item {
+  display: flex;
+  padding: 22rpx;
+  margin-bottom: 20rpx;
+}
+
+.item-cover {
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+  font-size: 76rpx;
+}
+
+.item-body {
+  padding-left: 22rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  max-width: 100%;
+}
+
+.item-tags {
+  flex-wrap: wrap;
+  margin-top: 8rpx;
+}
+
+.item-tags .tag {
+  margin: 0 10rpx 6rpx 0;
+}
+
+.item-meta {
+  margin-top: 6rpx;
+}
+
+.item-town {
+  font-size: 23rpx;
+  color: var(--text-3);
+  max-width: 280rpx;
+}
+
+.item-score {
+  font-size: 23rpx;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.item-foot {
+  margin-top: 8rpx;
+  padding-top: 10rpx;
+  border-top: 2rpx solid var(--line);
+}
+
+.item-ticket {
+  font-size: 23rpx;
+  color: var(--primary);
+  max-width: 240rpx;
+}
+
+.item-duration {
+  font-size: 21rpx;
+  color: var(--text-3);
+}
+
+.plan-tip {
+  padding-left: 8rpx;
+}
+
+.plan-tip-t {
+  font-size: 27rpx;
+  font-weight: 600;
+}
+
+.plan-tip-s {
+  font-size: 21rpx;
+  color: var(--text-3);
+  margin-top: 4rpx;
+}

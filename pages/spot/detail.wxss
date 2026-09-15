@@ -1,0 +1,298 @@
+/* pages/spot/detail.wxss */
+.cover {
+  position: relative;
+  height: 460rpx;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cover-emoji {
+  font-size: 180rpx;
+  line-height: 1;
+  opacity: 0.92;
+}
+
+.cover-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 260rpx;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0));
+}
+
+.cover-text {
+  position: absolute;
+  left: 32rpx;
+  right: 32rpx;
+  bottom: 34rpx;
+  color: #fff;
+}
+
+.cover-name {
+  font-size: 44rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.cover-town {
+  font-size: 24rpx;
+  opacity: 0.9;
+  margin-top: 10rpx;
+}
+
+.cover-tags {
+  margin-top: 16rpx;
+  flex-wrap: wrap;
+}
+
+.cover-tag {
+  background: rgba(255, 255, 255, 0.24);
+  color: #fff;
+  margin: 0 12rpx 8rpx 0;
+}
+
+/* ---------- 概览 ---------- */
+.overview {
+  margin: -40rpx 24rpx 0;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 26rpx 0;
+}
+
+.ov-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10rpx;
+}
+
+.ov-num {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.ov-num.small {
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 1.35;
+}
+
+.ov-lbl {
+  font-size: 21rpx;
+  color: var(--text-3);
+  margin-top: 8rpx;
+}
+
+.ov-line {
+  width: 2rpx;
+  height: 56rpx;
+  background: var(--line);
+}
+
+/* ---------- 内容块 ---------- */
+.block {
+  margin-top: 20rpx;
+  padding: 26rpx 24rpx;
+}
+
+.block-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 18rpx;
+}
+
+.paragraph {
+  font-size: 27rpx;
+  color: var(--text-2);
+  line-height: 1.85;
+  text-align: justify;
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  padding: 14rpx 0;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-k {
+  width: 150rpx;
+  flex-shrink: 0;
+  font-size: 25rpx;
+  color: var(--text-3);
+}
+
+.info-v {
+  font-size: 26rpx;
+  color: var(--text-1);
+  line-height: 1.6;
+}
+
+.info-act {
+  flex-shrink: 0;
+  font-size: 23rpx;
+  color: var(--primary);
+  padding-left: 16rpx;
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  padding: 10rpx 0;
+}
+
+.point-ico {
+  color: var(--primary);
+  font-size: 24rpx;
+  margin-right: 14rpx;
+  line-height: 1.7;
+}
+
+.point-txt {
+  flex: 1;
+  font-size: 27rpx;
+  color: var(--text-1);
+  line-height: 1.7;
+}
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  padding: 10rpx 0;
+}
+
+.tip-ico {
+  font-size: 26rpx;
+  margin-right: 12rpx;
+  line-height: 1.6;
+}
+
+.tip-txt {
+  flex: 1;
+  font-size: 26rpx;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+.food-tag {
+  margin: 0 12rpx 12rpx 0;
+  height: 44rpx;
+  padding: 0 20rpx;
+  font-size: 24rpx;
+}
+
+/* ---------- 推荐路线 ---------- */
+.route {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.route-ico {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+  margin-right: 22rpx;
+  font-size: 52rpx;
+}
+
+.route-name {
+  font-size: 29rpx;
+  font-weight: 700;
+  max-width: 380rpx;
+}
+
+.route-days {
+  font-size: 22rpx;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-radius: 8rpx;
+  padding: 2rpx 12rpx;
+}
+
+.route-sum {
+  font-size: 23rpx;
+  color: var(--text-2);
+  margin-top: 10rpx;
+  line-height: 1.5;
+}
+
+/* ---------- 周边景点 ---------- */
+.grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mini {
+  width: 220rpx;
+  overflow: hidden;
+}
+
+.mini-cover {
+  height: 150rpx;
+  font-size: 62rpx;
+}
+
+.mini-name {
+  font-size: 24rpx;
+  text-align: center;
+  padding: 16rpx 12rpx;
+}
+
+/* ---------- 好物 ---------- */
+.goods-row {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 20rpx;
+  margin-bottom: 18rpx;
+}
+
+.goods-ico {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  font-size: 46rpx;
+}
+
+.goods-name {
+  font-size: 27rpx;
+  font-weight: 600;
+}
+
+.goods-desc {
+  font-size: 22rpx;
+  color: var(--text-3);
+  margin-top: 6rpx;
+}
+
+/* ---------- 底部栏 ---------- */
+.bar-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 110rpx;
+}
+
+.bar-ico {
+  font-size: 34rpx;
+  line-height: 1.2;
+}
+
+.bar-txt {
+  font-size: 20rpx;
+  color: var(--text-2);
+}

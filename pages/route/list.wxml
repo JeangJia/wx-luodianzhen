@@ -1,0 +1,70 @@
+<!--pages/route/list.wxml-->
+<view class="page has-bottom">
+
+  <view class="banner-tip">
+    <view class="tip-t">不知道怎么安排？</view>
+    <view class="tip-s">按天数与偏好，一键生成专属行程</view>
+    <view class="btn btn-primary btn-sm" bindtap="goPlan">智能规划</view>
+  </view>
+
+  <scroll-view class="chips" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="chips-inner">
+      <view
+        class="chip {{active === item.key ? 'chip-on' : ''}}"
+        wx:for="{{filters}}"
+        wx:key="key"
+        bindtap="onFilterTap"
+        data-key="{{item.key}}"
+      >{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="wrap">
+    <view
+      class="route card"
+      wx:for="{{list}}"
+      wx:key="id"
+      bindtap="goDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="route-cover ph ph-{{item.theme}}">
+        <view class="route-emoji">{{item.emoji}}</view>
+        <view class="route-days">{{item.days}}天</view>
+      </view>
+      <view class="route-body">
+        <view class="route-name">{{item.name}}</view>
+        <view class="route-sum ellipsis-2">{{item.summary}}</view>
+        <view class="route-meta">
+          <view class="meta-row">
+            <text class="meta-k">最佳季节</text>
+            <text class="meta-v ellipsis">{{item.bestSeason}}</text>
+          </view>
+          <view class="meta-row">
+            <text class="meta-k">适合人群</text>
+            <text class="meta-v ellipsis">{{item.suitable}}</text>
+          </view>
+          <view class="meta-row">
+            <text class="meta-k">预算参考</text>
+            <text class="meta-v ellipsis">{{item.budget}}</text>
+          </view>
+        </view>
+        <view class="row" style="flex-wrap: wrap;">
+          <text class="tag tag-line route-tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{list.length === 0}}">
+      <view class="empty-icon">🧭</view>
+      <view>该分类下暂无路线</view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="bar-info flex1">
+      <view class="bar-info-t">想要不一样的行程？</view>
+      <view class="bar-info-s">选择景点，自动排出时间表</view>
+    </view>
+    <view class="btn btn-primary" bindtap="goPlan">去规划</view>
+  </view>
+</view>

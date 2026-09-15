@@ -1,0 +1,203 @@
+/* pages/product/list.wxss */
+.page {
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+}
+
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  padding: 20rpx 0 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  height: 76rpx;
+  margin: 0 24rpx;
+  padding: 0 24rpx;
+  border-radius: 38rpx;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.search-ico {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  font-size: 27rpx;
+}
+
+.search-ph {
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+.chips {
+  margin-top: 18rpx;
+  white-space: nowrap;
+}
+
+.chips-inner {
+  display: inline-flex;
+  padding: 0 24rpx;
+}
+
+.chip {
+  flex-shrink: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  padding: 0 30rpx;
+  border-radius: 30rpx;
+  background: #fff;
+  color: var(--text-2);
+  font-size: 26rpx;
+  margin-right: 16rpx;
+}
+
+.chip-on {
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+
+.sort-bar {
+  display: flex;
+  align-items: center;
+  padding: 18rpx 24rpx 14rpx;
+}
+
+.sort {
+  font-size: 25rpx;
+  color: var(--text-2);
+  margin-right: 40rpx;
+}
+
+.sort-on {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.wrapper {
+  padding: 0 24rpx;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.goods {
+  width: 342rpx;
+  margin-bottom: 20rpx;
+}
+
+.goods-cover {
+  position: relative;
+  height: 260rpx;
+  font-size: 96rpx;
+}
+
+.goods-emoji {
+  line-height: 1;
+}
+
+.goods-badge {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20rpx;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.32);
+  border-bottom-right-radius: 14rpx;
+  padding: 4rpx 14rpx;
+}
+
+.goods-body {
+  padding: 18rpx 20rpx 20rpx;
+}
+
+.goods-name {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.goods-origin {
+  font-size: 21rpx;
+  color: var(--text-3);
+  margin-top: 8rpx;
+}
+
+.goods-sales {
+  font-size: 21rpx;
+  color: var(--text-3);
+  margin-top: 6rpx;
+}
+
+.goods-foot {
+  margin-top: 12rpx;
+}
+
+.goods-act {
+  margin-top: 12rpx;
+}
+
+.goods-unit {
+  font-size: 21rpx;
+  color: var(--text-3);
+}
+
+.add-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- 悬浮购物车 ---------- */
+.float-cart {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(60rpx + env(safe-area-inset-bottom));
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10rpx 30rpx rgba(199, 49, 43, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+}
+
+.float-ico {
+  font-size: 46rpx;
+}
+
+.badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 36rpx;
+  height: 36rpx;
+  padding: 0 8rpx;
+  border-radius: 18rpx;
+  background: var(--primary);
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,71 @@
+<!--pages/spot/list.wxml-->
+<view class="page has-bottom">
+  <view class="search-wrap">
+    <view class="search">
+      <text class="search-ico">🔍</text>
+      <input
+        class="search-input"
+        value="{{keyword}}"
+        placeholder="搜索景点名称、所在乡镇或特色"
+        placeholder-class="search-ph"
+        bindinput="onKeywordInput"
+        confirm-type="search"
+      />
+      <text class="search-clear" wx:if="{{keyword}}" bindtap="clearKeyword">✕</text>
+    </view>
+    <scroll-view class="chips" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="chips-inner">
+        <view
+          class="chip {{active === item.key ? 'chip-on' : ''}}"
+          wx:for="{{categories}}"
+          wx:key="key"
+          bindtap="onCategoryTap"
+          data-key="{{item.key}}"
+        >{{item.name}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="count wrap">共 {{list.length}} 个景点</view>
+
+  <view class="wrap">
+    <view
+      class="item card"
+      wx:for="{{list}}"
+      wx:key="id"
+      bindtap="goDetail"
+      data-id="{{item.id}}"
+    >
+      <view class="item-cover ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="item-body flex1">
+        <view class="row between">
+          <text class="item-name ellipsis">{{item.name}}</text>
+        </view>
+        <view class="item-tags row">
+          <text class="tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+        </view>
+        <view class="item-meta row between">
+          <text class="item-town ellipsis">{{item.town}}</text>
+          <text class="item-score">★ {{item.rating}}</text>
+        </view>
+        <view class="item-foot row between">
+          <text class="item-ticket ellipsis">{{item.ticket}}</text>
+          <text class="item-duration">{{item.duration}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{list.length === 0}}">
+      <view class="empty-icon">🧭</view>
+      <view>没有找到匹配的景点，换个关键词试试</view>
+    </view>
+  </view>
+
+  <view class="bottom-bar">
+    <view class="plan-tip flex1">
+      <view class="plan-tip-t">行程还没定？</view>
+      <view class="plan-tip-s">按天数和偏好自动生成路线</view>
+    </view>
+    <view class="btn btn-primary" bindtap="goPlan">智能规划行程</view>
+  </view>
+</view>

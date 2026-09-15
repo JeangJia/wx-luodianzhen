@@ -1,0 +1,136 @@
+<!--pages/mine/mine.wxml-->
+<view class="page">
+
+  <!-- 用户信息 -->
+  <view class="head">
+    <view class="avatar-wrap">
+      <image wx:if="{{avatarUrl}}" class="avatar" src="{{avatarUrl}}" mode="aspectFill" />
+      <view wx:else class="avatar avatar-ph">🙂</view>
+      <button class="avatar-hit" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar"></button>
+    </view>
+    <view class="head-info flex1">
+      <input
+        class="nick-input"
+        type="nickname"
+        value="{{nickName}}"
+        placeholder="点击设置昵称"
+        placeholder-class="nick-ph"
+        bindblur="onNickChange"
+      />
+      <view class="head-sub">欢迎使用「游罗店」小镇服务平台</view>
+    </view>
+  </view>
+
+  <!-- 数据速览 -->
+  <view class="wrap">
+    <view class="card stats">
+      <view class="stat" bindtap="goSpotList">
+        <view class="stat-num">{{stats.spot}}</view>
+        <view class="stat-lbl">景点</view>
+      </view>
+      <view class="stat-line"></view>
+      <view class="stat" bindtap="goPlan">
+        <view class="stat-num">{{stats.route}}</view>
+        <view class="stat-lbl">精品路线</view>
+      </view>
+      <view class="stat-line"></view>
+      <view class="stat" bindtap="goProductList">
+        <view class="stat-num">{{stats.product}}</view>
+        <view class="stat-lbl">农产品</view>
+      </view>
+      <view class="stat-line"></view>
+      <view class="stat" bindtap="goCart">
+        <view class="stat-num">{{cartCount}}</view>
+        <view class="stat-lbl">购物车</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 我的订单 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-head" bindtap="goOrders" data-status="all">
+        <text class="block-title">我的订单</text>
+        <text class="block-more">查看全部 ›</text>
+      </view>
+      <view class="orders">
+        <view
+          class="order-entry"
+          wx:for="{{orderEntries}}"
+          wx:key="key"
+          bindtap="goOrders"
+          data-status="{{item.key}}"
+        >
+          <view class="order-ico">
+            <text>{{item.icon}}</text>
+            <view class="dot" wx:if="{{item.key === 'unpaid' && counts.unpaid > 0}}">{{counts.unpaid}}</view>
+          </view>
+          <view class="order-name">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 常用功能 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-head">
+        <text class="block-title">常用功能</text>
+      </view>
+      <view class="cell" bindtap="goPlan">
+        <text class="cell-ico">🎯</text>
+        <text class="cell-name flex1">智能行程规划</text>
+        <text class="cell-arrow">›</text>
+      </view>
+      <view class="cell" bindtap="goCart">
+        <text class="cell-ico">🧺</text>
+        <text class="cell-name flex1">我的购物车</text>
+        <text class="cell-val" wx:if="{{cartCount > 0}}">{{cartCount}} 件</text>
+        <text class="cell-arrow">›</text>
+      </view>
+      <view class="cell" bindtap="goSpotList">
+        <text class="cell-ico">🗺️</text>
+        <text class="cell-name flex1">景点导览</text>
+        <text class="cell-arrow">›</text>
+      </view>
+      <view class="cell" bindtap="goProductList">
+        <text class="cell-ico">🌾</text>
+        <text class="cell-name flex1">农产品商城</text>
+        <text class="cell-arrow">›</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 服务与帮助 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-head">
+        <text class="block-title">服务与帮助</text>
+      </view>
+      <view class="cell" bindtap="callService">
+        <text class="cell-ico">☎️</text>
+        <text class="cell-name flex1">联系客服</text>
+        <text class="cell-val">0712-7622000</text>
+        <text class="cell-arrow">›</text>
+      </view>
+      <view class="cell" bindtap="showGuide">
+        <text class="cell-ico">📖</text>
+        <text class="cell-name flex1">使用说明</text>
+        <text class="cell-arrow">›</text>
+      </view>
+      <view class="cell" bindtap="showAbout">
+        <text class="cell-ico">ℹ️</text>
+        <text class="cell-name flex1">关于我们</text>
+        <text class="cell-arrow">›</text>
+      </view>
+      <view class="cell cell-share">
+        <text class="cell-ico">📤</text>
+        <text class="cell-name flex1">分享给好友</text>
+        <text class="cell-arrow">›</text>
+        <button class="share-hit" open-type="share"></button>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer">游罗店 · 让每一次到访都更省心</view>
+</view>

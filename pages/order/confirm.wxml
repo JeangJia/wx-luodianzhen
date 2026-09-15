@@ -1,0 +1,129 @@
+<!--pages/order/confirm.wxml-->
+<view class="page has-bottom">
+
+  <!-- 收货信息 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-head">
+        <text class="block-title">收货信息</text>
+        <text class="block-tip">用于农产品寄递</text>
+      </view>
+
+      <view class="field">
+        <text class="field-k">收货人</text>
+        <input
+          class="field-input"
+          value="{{name}}"
+          data-field="name"
+          placeholder="请输入姓名"
+          placeholder-class="field-ph"
+          bindinput="onInput"
+        />
+      </view>
+
+      <view class="field">
+        <text class="field-k">手机号</text>
+        <input
+          class="field-input"
+          value="{{phone}}"
+          data-field="phone"
+          type="number"
+          maxlength="11"
+          placeholder="用于接收发货通知"
+          placeholder-class="field-ph"
+          bindinput="onInput"
+        />
+      </view>
+
+      <view class="field field-last">
+        <text class="field-k">收货地址</text>
+        <textarea
+          class="field-textarea"
+          value="{{detail}}"
+          data-field="detail"
+          placeholder="省 / 市 / 县 / 乡镇 / 详细地址"
+          placeholder-class="field-ph"
+          maxlength="120"
+          auto-height
+          bindinput="onInput"
+        />
+      </view>
+    </view>
+  </view>
+
+  <!-- 商品清单 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-head">
+        <text class="block-title">商品清单</text>
+        <text class="block-tip">共 {{num}} 件</text>
+      </view>
+
+      <view class="goods" wx:for="{{items}}" wx:key="key">
+        <view class="goods-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+        <view class="flex1">
+          <view class="goods-name ellipsis">{{item.name}}</view>
+          <view class="goods-spec ellipsis">{{item.spec}}</view>
+        </view>
+        <view class="goods-right">
+          <view class="price"><text class="price-sym">¥</text><text class="price-num">{{item.price}}</text></view>
+          <view class="goods-qty">×{{item.qty}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="block-head">
+        <text class="block-title">订单备注</text>
+      </view>
+      <textarea
+        class="remark"
+        value="{{remark}}"
+        data-field="remark"
+        placeholder="如有特殊要求可在此说明，例如希望周末送达"
+        placeholder-class="field-ph"
+        maxlength="100"
+        bindinput="onInput"
+      />
+    </view>
+  </view>
+
+  <!-- 金额明细 -->
+  <view class="wrap">
+    <view class="card block">
+      <view class="amount-row">
+        <text class="amount-k">商品金额</text>
+        <text class="amount-v">¥{{amount}}</text>
+      </view>
+      <view class="amount-row">
+        <text class="amount-k">运费</text>
+        <text class="amount-v">包邮</text>
+      </view>
+      <view class="amount-row">
+        <text class="amount-k">配送说明</text>
+        <text class="amount-v">产地直发，48 小时内出库</text>
+      </view>
+      <view class="amount-row amount-total">
+        <text class="amount-k">应付合计</text>
+        <view class="price"><text class="price-sym">¥</text><text class="price-num">{{total}}</text></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="notice">农产品为产地直发，实际发货时间可能受天气与采摘季影响；如需开票或批量采购，请联系客服。</view>
+
+  <!-- 底部 -->
+  <view class="bottom-bar">
+    <view class="bar-total flex1">
+      <text class="bar-k">合计</text>
+      <view class="price"><text class="price-sym">¥</text><text class="price-num">{{total}}</text></view>
+    </view>
+    <view class="bar-service" bindtap="callService">联系客服</view>
+    <view class="btn {{submitting ? 'btn-disabled' : 'btn-primary'}}" bindtap="submit">
+      {{submitting ? '提交中...' : '提交订单'}}
+    </view>
+  </view>
+</view>

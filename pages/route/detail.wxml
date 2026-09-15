@@ -1,0 +1,107 @@
+<!--pages/route/detail.wxml-->
+<view class="page has-bottom" wx:if="{{route}}">
+
+  <!-- 头部 -->
+  <view class="head ph ph-{{route.theme}}">
+    <view class="head-emoji">{{route.emoji}}</view>
+    <view class="head-info">
+      <view class="head-name">{{route.name}}</view>
+      <view class="head-tags row">
+        <text class="tag head-tag">{{route.days}}天行程</text>
+        <text class="tag head-tag">{{spotCount}}个景点</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="wrap">
+    <!-- 路线说明 -->
+    <view class="card block">
+      <view class="block-title">路线说明</view>
+      <view class="paragraph">{{route.summary}}</view>
+      <view class="meta-row">
+        <text class="meta-k">最佳季节</text>
+        <text class="meta-v flex1">{{route.bestSeason}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-k">预算参考</text>
+        <text class="meta-v flex1">{{route.budget}}</text>
+      </view>
+      <view class="meta-row">
+        <text class="meta-k">适合人群</text>
+        <text class="meta-v flex1">{{route.suitable}}</text>
+      </view>
+      <view class="row" style="flex-wrap: wrap; margin-top: 14rpx;">
+        <text class="tag tag-line route-tag" wx:for="{{route.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+    </view>
+
+    <!-- 逐日行程 -->
+    <view class="sec">
+      <view class="sec-t">行程安排</view>
+    </view>
+
+    <view class="day card" wx:for="{{days}}" wx:for-item="day" wx:key="day">
+      <view class="day-head">
+        <view class="day-badge">D{{day.day}}</view>
+        <view class="day-title">{{day.title}}</view>
+      </view>
+
+      <view class="timeline">
+        <view class="tl-item" wx:for="{{day.items}}" wx:for-item="it" wx:key="time">
+          <view class="tl-left">
+            <view class="tl-dot {{it.spot ? 'tl-dot-on' : ''}}"></view>
+            <view class="tl-line"></view>
+          </view>
+          <view class="tl-body">
+            <view class="tl-time">{{it.time}}</view>
+            <view class="tl-title">{{it.title}}</view>
+            <view class="tl-note" wx:if="{{it.note}}">{{it.note}}</view>
+
+            <view class="tl-spot" wx:if="{{it.spot}}" bindtap="goSpot" data-id="{{it.spot.id}}">
+              <view class="tl-spot-ico ph ph-{{it.spot.theme}}">{{it.spot.emoji}}</view>
+              <view class="flex1">
+                <view class="tl-spot-name ellipsis">{{it.spot.name}}</view>
+                <view class="tl-spot-meta ellipsis">{{it.spot.town}} · 建议 {{it.spot.duration}}</view>
+              </view>
+              <view
+                class="tl-nav"
+                catchtap="openMap"
+                data-lat="{{it.spot.lat}}"
+                data-lng="{{it.spot.lng}}"
+                data-title="{{it.spot.name}}"
+                data-town="{{it.spot.address}}"
+              >导航</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 顺路好物 -->
+    <view class="sec">
+      <view class="sec-t">顺路带点伴手礼</view>
+    </view>
+    <view class="goods-row card" wx:for="{{relatedProducts}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
+      <view class="goods-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="flex1">
+        <view class="goods-name ellipsis">{{item.name}}</view>
+        <view class="goods-desc ellipsis">{{item.tags[0]}}</view>
+      </view>
+      <view class="price"><text class="price-sym">¥</text><text class="price-num">{{item.price}}</text></view>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="bottom-bar">
+    <view class="bar-btn" bindtap="copyPlan">
+      <text class="bar-ico">📋</text>
+      <text class="bar-txt">复制</text>
+    </view>
+    <view class="bar-btn" bindtap="callService">
+      <text class="bar-ico">☎️</text>
+      <text class="bar-txt">咨询</text>
+    </view>
+    <view class="btn btn-plain" bindtap="goPlan" style="margin-right: 16rpx;">自定义</view>
+    <view class="btn btn-primary flex1" bindtap="copyPlan">保存这份行程</view>
+  </view>
+</view>

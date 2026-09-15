@@ -1,0 +1,566 @@
+/* pages/index/index.wxss */
+.page {
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+}
+
+/* ---------- 顶部（纯色黛瓦青，避免渐变断层） ---------- */
+.hero {
+  background: #2E6E6B;
+  padding: 24rpx 24rpx 110rpx;
+  color: #fff;
+}
+
+.hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 10rpx 4rpx 28rpx;
+}
+
+.hero-title {
+  font-size: 48rpx;
+  font-weight: 700;
+  letter-spacing: 4rpx;
+  color: #F0DFB0;
+}
+
+/* 罗店金短线，呼应“金罗店” */
+.hero-title::after {
+  content: '';
+  display: block;
+  width: 72rpx;
+  height: 6rpx;
+  border-radius: 3rpx;
+  background: #C8A24A;
+  margin-top: 16rpx;
+}
+
+.hero-sub {
+  font-size: 24rpx;
+  opacity: 0.85;
+  margin-top: 8rpx;
+}
+
+.hero-cart {
+  position: relative;
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-cart-ico {
+  font-size: 36rpx;
+}
+
+.badge {
+  position: absolute;
+  top: -6rpx;
+  right: -6rpx;
+  min-width: 34rpx;
+  height: 34rpx;
+  padding: 0 8rpx;
+  border-radius: 17rpx;
+  background: #C34A3A;
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  height: 76rpx;
+  padding: 0 26rpx;
+  border-radius: 38rpx;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.search-ico {
+  font-size: 28rpx;
+  margin-right: 12rpx;
+}
+
+.search-ph {
+  font-size: 26rpx;
+  color: #9AA1AC;
+}
+
+/* ---------- 轮播 ---------- */
+.banner {
+  height: 300rpx;
+  margin: -80rpx 24rpx 0;
+  border-radius: 24rpx;
+  overflow: hidden;
+  box-shadow: 0 12rpx 32rpx rgba(35, 81, 79, 0.22);
+}
+
+.banner-item {
+  position: relative;
+  justify-content: flex-start;
+  padding-left: 40rpx;
+}
+
+/* 深色半透明遮罩：保证白色文字在任何底图上都有足够对比度 */
+.banner-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(18, 33, 32, 0.62) 0%,
+    rgba(18, 33, 32, 0.28) 55%,
+    rgba(18, 33, 32, 0.52) 100%
+  );
+}
+
+.banner-emoji {
+  position: relative;
+  z-index: 1;
+  font-size: 120rpx;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.banner-text {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  padding-left: 24rpx;
+  color: #fff;
+}
+
+.banner-t {
+  font-size: 36rpx;
+  font-weight: 700;
+  text-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.45);
+}
+
+.banner-s {
+  font-size: 23rpx;
+  margin-top: 10rpx;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- 快捷入口 ---------- */
+.entry-card {
+  margin: 24rpx 24rpx 0;
+  padding: 30rpx 8rpx 6rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.entry {
+  width: 16.6666%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 26rpx;
+}
+
+/* 统一浅青绿底（主色 10%），突出品牌色，图标本身保留原有色彩 */
+.entry-ico {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 18rpx;
+  background: rgba(46, 110, 107, 0.1);
+  border: 1rpx solid rgba(46, 110, 107, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  line-height: 1;
+}
+
+.entry-name {
+  font-size: 20rpx;
+  color: var(--text-2);
+  margin-top: 10rpx;
+}
+
+/* ---------- 实时资讯（上下滚动轮播） ---------- */
+.notice {
+  display: flex;
+  align-items: center;
+  margin: 24rpx 24rpx 0;
+  height: 88rpx;
+  padding: 0 20rpx;
+  border-radius: 20rpx;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.notice-head {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 16rpx;
+  padding-right: 16rpx;
+  border-right: 2rpx solid var(--line);
+}
+
+/* 喇叭图标用罗店金内联 SVG，做页面点缀色 */
+.notice-ico {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C8A24A' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 9.6h3.4L12.4 5v14L7.4 14.4H4z'/%3E%3Cpath d='M16.2 9.1a4.2 4.2 0 0 1 0 5.8'/%3E%3Cpath d='M18.9 6.5a7.9 7.9 0 0 1 0 11'/%3E%3C/svg%3E");
+}
+
+.notice-tag {
+  font-size: 24rpx;
+  font-weight: 700;
+  color: var(--gold-deep);
+  white-space: nowrap;
+}
+
+.notice-swiper {
+  flex: 1;
+  min-width: 0;
+  height: 88rpx;
+}
+
+.notice-item {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+}
+
+.notice-txt {
+  display: block;
+  width: 100%;
+  font-size: 24rpx;
+  color: var(--text-1);
+}
+
+.notice-more {
+  flex-shrink: 0;
+  padding-left: 16rpx;
+  font-size: 23rpx;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ---------- 数据速览 ---------- */
+.stats {
+  margin: 24rpx 24rpx 0;
+  display: flex;
+  align-items: center;
+  padding: 28rpx 0;
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-num {
+  font-size: 42rpx;
+  font-weight: 700;
+  color: var(--gold-deep);
+  line-height: 1.2;
+}
+
+.stat-lbl {
+  font-size: 22rpx;
+  color: var(--text-3);
+  margin-top: 8rpx;
+}
+
+.stat-line {
+  width: 2rpx;
+  height: 60rpx;
+  background: var(--line);
+}
+
+/* ---------- 热门景点（长方形卡片） ---------- */
+.hscroll {
+  width: 100%;
+}
+
+.hscroll-inner {
+  display: flex;
+  padding: 0 24rpx;
+}
+
+.spot-card {
+  width: 350rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.spot-card:last-child {
+  margin-right: 0;
+}
+
+/* 上半部分：底图 + 徽章 + 标题 */
+.spot-cover {
+  position: relative;
+  height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 24rpx;
+}
+
+/* 底部深色渐变，保证白色标题可读 */
+.spot-cover-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 78%;
+  background: linear-gradient(180deg, rgba(18, 33, 32, 0) 0%, rgba(18, 33, 32, 0.66) 100%);
+}
+
+/* 左上角特色图标：圆角六边形徽章 */
+.spot-badge {
+  position: absolute;
+  left: 20rpx;
+  top: 20rpx;
+  z-index: 2;
+  width: 78rpx;
+  height: 78rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  line-height: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 88,30 88,70 50,90 12,70 12,30' fill='%23FFFFFF' fill-opacity='0.94' stroke='%23FFFFFF' stroke-opacity='0.94' stroke-width='16' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 右上角评分 */
+.spot-cover-score {
+  position: absolute;
+  right: 20rpx;
+  top: 26rpx;
+  z-index: 2;
+  height: 40rpx;
+  padding: 0 14rpx;
+  border-radius: 20rpx;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 22rpx;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.spot-cover-text {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.spot-cover-t {
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 1.35;
+  color: #fff;
+  text-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.4);
+}
+
+.spot-cover-s {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.4);
+}
+
+/* 下半部分：编号特色列表 */
+.spot-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx 24rpx 18rpx;
+  background: var(--card);
+}
+
+.spot-feature {
+  display: flex;
+  align-items: center;
+  padding: 9rpx 0;
+}
+
+.spot-feature-no {
+  flex-shrink: 0;
+  margin-right: 14rpx;
+  font-size: 26rpx;
+  font-weight: 800;
+  letter-spacing: -1rpx;
+}
+
+.spot-feature:nth-child(1) .spot-feature-no {
+  color: var(--red);
+}
+
+.spot-feature:nth-child(2) .spot-feature-no {
+  color: #C08A3E;
+}
+
+.spot-feature:nth-child(3) .spot-feature-no {
+  color: var(--gold);
+}
+
+.spot-feature-txt {
+  flex: 1;
+  min-width: 0;
+  font-size: 24rpx;
+  color: var(--text-2);
+}
+
+/* 卡片等高，用 margin-top: auto 把“查看更多”压到底部对齐 */
+.spot-more {
+  margin-top: auto;
+  padding-top: 12rpx;
+  text-align: center;
+  font-size: 23rpx;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* ---------- 路线卡片 ---------- */
+.route-card {
+  display: flex;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.route-cover {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+  font-size: 64rpx;
+}
+
+.route-body {
+  padding-left: 22rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.route-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  max-width: 340rpx;
+}
+
+.route-days {
+  font-size: 22rpx;
+  color: var(--primary);
+  background: var(--primary-soft);
+  border-radius: 8rpx;
+  padding: 2rpx 12rpx;
+  flex-shrink: 0;
+}
+
+.route-sum {
+  font-size: 23rpx;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin: 10rpx 0;
+}
+
+.route-tags {
+  flex-wrap: wrap;
+}
+
+.route-tags .tag {
+  margin-bottom: 6rpx;
+}
+
+/* ---------- 规划引导条 ---------- */
+.plan-bar {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 24rpx;
+  background: linear-gradient(135deg, #FBF5E6, #F1E6CB);
+  box-shadow: none;
+}
+
+.plan-t {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.plan-s {
+  font-size: 22rpx;
+  color: var(--text-2);
+  margin-top: 6rpx;
+}
+
+/* ---------- 农产品网格 ---------- */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.goods {
+  width: 342rpx;
+  margin-bottom: 20rpx;
+}
+
+.goods-cover {
+  height: 250rpx;
+  font-size: 88rpx;
+}
+
+.goods-body {
+  padding: 18rpx 20rpx 22rpx;
+}
+
+.goods-name {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.goods-tag {
+  font-size: 21rpx;
+  color: var(--green);
+  background: var(--green-soft);
+  border-radius: 6rpx;
+  padding: 2rpx 10rpx;
+  display: inline-block;
+  margin-top: 10rpx;
+}
+
+.goods-foot {
+  margin-top: 14rpx;
+}
+
+.goods-unit {
+  font-size: 21rpx;
+  color: var(--text-3);
+}
+
+/* ---------- 页脚 ---------- */
+.footer {
+  text-align: center;
+  font-size: 22rpx;
+  color: var(--text-3);
+  padding: 50rpx 0 20rpx;
+}

@@ -1,0 +1,78 @@
+<!--pages/product/list.wxml-->
+<view class="page">
+
+  <view class="top">
+    <view class="search">
+      <text class="search-ico">🔍</text>
+      <input
+        class="search-input"
+        value="{{keyword}}"
+        placeholder="搜索农产品、产地"
+        placeholder-class="search-ph"
+        bindinput="onKeywordInput"
+      />
+    </view>
+    <scroll-view class="chips" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="chips-inner">
+        <view
+          class="chip {{active === item.key ? 'chip-on' : ''}}"
+          wx:for="{{categories}}"
+          wx:key="key"
+          bindtap="onCategoryTap"
+          data-key="{{item.key}}"
+        >{{item.name}}</view>
+      </view>
+    </scroll-view>
+    <view class="sort-bar">
+      <view
+        class="sort {{sort === item.key ? 'sort-on' : ''}}"
+        wx:for="{{sorts}}"
+        wx:key="key"
+        bindtap="onSortTap"
+        data-key="{{item.key}}"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="wrapper">
+    <view class="grid">
+      <view
+        class="goods card"
+        wx:for="{{list}}"
+        wx:key="id"
+        bindtap="goDetail"
+        data-id="{{item.id}}"
+      >
+        <view class="goods-cover ph ph-{{item.theme}}">
+          <text class="goods-emoji">{{item.emoji}}</text>
+          <view class="goods-badge" wx:if="{{item.tags[0]}}">{{item.tags[0]}}</view>
+        </view>
+        <view class="goods-body">
+          <view class="goods-name ellipsis">{{item.name}}</view>
+          <view class="goods-origin ellipsis">{{item.origin}}</view>
+          <view class="goods-sales">已售 {{item.sales}} · 库存 {{item.stock}}</view>
+          <view class="row between goods-foot">
+            <view class="price">
+              <text class="price-sym">¥</text><text class="price-num">{{item.price}}</text>
+              <text class="price-old" wx:if="{{item.originPrice}}">¥{{item.originPrice}}</text>
+            </view>
+          </view>
+          <view class="row between goods-act">
+            <text class="goods-unit">{{item.unit}}</text>
+            <view class="add-btn" catchtap="addToCart" data-id="{{item.id}}">＋</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty" wx:if="{{list.length === 0}}">
+      <view class="empty-icon">🧺</view>
+      <view>没有找到相关农产品</view>
+    </view>
+  </view>
+
+  <view class="float-cart" bindtap="goCart">
+    <text class="float-ico">🧺</text>
+    <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+  </view>
+</view>
