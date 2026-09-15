@@ -1,10 +1,10 @@
 <!--pages/index/index.wxml-->
 <view class="page">
 
-  <!-- 顶部红色区域 -->
+  <!-- 顶部区域 -->
   <view class="hero">
     <view class="hero-top">
-      <view>
+      <view class="hero-left">
         <view class="hero-title">游罗店</view>
         <view class="hero-sub">罗店镇文旅导览 · 农产品直供平台</view>
       </view>
@@ -38,8 +38,9 @@
         data-type="{{item.type}}"
         data-id="{{item.targetId}}"
       >
+        <image wx:if="{{item.cover}}" class="banner-img" src="{{item.cover}}" mode="aspectFill" />
         <view class="banner-mask"></view>
-        <view class="banner-emoji">{{item.emoji}}</view>
+        <view class="banner-emoji" wx:if="{{!item.cover}}">{{item.emoji}}</view>
         <view class="banner-text">
           <view class="banner-t">{{item.title}}</view>
           <view class="banner-s">{{item.subtitle}}</view>
@@ -79,7 +80,7 @@
   <!-- 快捷入口 -->
   <view class="card entry-card">
     <view class="entry" wx:for="{{entries}}" wx:key="key" bindtap="onEntryTap" data-key="{{item.key}}">
-      <view class="entry-ico">{{item.icon}}</view>
+      <view class="entry-ico entry-ico--{{item.icon}}"></view>
       <view class="entry-name">{{item.name}}</view>
     </view>
   </view>
@@ -115,9 +116,12 @@
         wx:key="id"
         bindtap="goSpotDetail"
         data-id="{{item.id}}"
+        hover-class="card-press"
+        hover-stay-time="60"
       >
         <!-- 上半部分：底图 + 左上角特色图标 + 标题 -->
         <view class="spot-cover ph ph-{{item.theme}}">
+          <image wx:if="{{item.cover}}" class="spot-cover-img" src="{{item.cover}}" mode="aspectFill" />
           <view class="spot-cover-mask"></view>
           <view class="spot-badge">{{item.emoji}}</view>
           <view class="spot-cover-score">★ {{item.rating}}</view>
@@ -148,7 +152,7 @@
   <!-- 精选路线 -->
   <view class="sec">
     <view class="sec-t">精选路线</view>
-    <view class="sec-more" bindtap="goRouteList">全部路线 ›</view>
+    <view class="sec-more" bindtap="goRouteList">全部路线 ({{stats.route}}) ›</view>
   </view>
   <view class="wrap">
     <view
@@ -157,26 +161,37 @@
       wx:key="id"
       bindtap="goRouteDetail"
       data-id="{{item.id}}"
+      hover-class="card-press"
+      hover-stay-time="60"
     >
-      <view class="route-cover ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="route-cover ph ph-{{item.theme}}">
+        <image wx:if="{{item.cover}}" class="route-cover-img" src="{{item.cover}}" mode="aspectFill" />
+        <text wx:else>{{item.emoji}}</text>
+      </view>
       <view class="route-body flex1">
-        <view class="row between">
-          <text class="route-name ellipsis">{{item.name}}</text>
-          <text class="route-days">{{item.days}}日</text>
+        <view class="route-head">
+          <view class="route-name ellipsis-2">{{item.name}}</view>
+          <view class="route-days">
+            <view class="route-days-ico"></view>
+            <text>{{item.days}}日</text>
+          </view>
         </view>
         <view class="route-sum ellipsis-2">{{item.summary}}</view>
         <view class="row route-tags">
-          <text class="tag tag-line" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+          <text class="tag tag-{{t.tone}}" wx:for="{{item.tagList}}" wx:for-item="t" wx:key="text">{{t.text}}</text>
         </view>
       </view>
     </view>
 
-    <view class="plan-bar card" bindtap="goPlan">
+    <view class="plan-bar card" bindtap="goPlan" hover-class="card-press" hover-stay-time="60">
       <view class="flex1">
         <view class="plan-t">不会安排行程？试试智能规划</view>
         <view class="plan-s">选择天数与偏好，一键生成专属行程</view>
       </view>
-      <view class="btn btn-primary btn-sm">去规划</view>
+      <view class="btn btn-primary btn-sm plan-btn">
+        <text>去规划</text>
+        <view class="plan-btn-arrow"></view>
+      </view>
     </view>
   </view>
 
@@ -193,7 +208,10 @@
       bindtap="goProductDetail"
       data-id="{{item.id}}"
     >
-      <view class="goods-cover ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="goods-cover ph ph-{{item.theme}}">
+        <image wx:if="{{item.cover}}" class="goods-cover-img" src="{{item.cover}}" mode="aspectFill" />
+        <text wx:else>{{item.emoji}}</text>
+      </view>
       <view class="goods-body">
         <view class="goods-name ellipsis">{{item.name}}</view>
         <view class="goods-tag ellipsis">{{item.tags[0]}}</view>

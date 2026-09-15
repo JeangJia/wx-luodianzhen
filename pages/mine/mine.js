@@ -1,15 +1,17 @@
 // pages/mine/mine.js
 const order = require('../../utils/order')
 const cart = require('../../utils/cart')
+const travel = require('../../utils/travel')
 const { spots } = require('../../data/spots')
 const { routes } = require('../../data/routes')
 const { products } = require('../../data/products')
 
+// 图标由 .order-ico--{key} 提供，不在这里放 emoji
 const ORDER_ENTRIES = [
-  { key: 'unpaid', icon: '💰', name: '待付款' },
-  { key: 'paid', icon: '📦', name: '待收货' },
-  { key: 'done', icon: '✅', name: '已完成' },
-  { key: 'all', icon: '📋', name: '全部订单' }
+  { key: 'unpaid', name: '待付款' },
+  { key: 'paid', name: '待收货' },
+  { key: 'done', name: '已完成' },
+  { key: 'all', name: '全部订单' }
 ]
 
 Page({
@@ -85,6 +87,11 @@ Page({
     wx.switchTab({ url: '/pages/product/list' })
   },
 
+  // 出行指南（与 utils/travel.js 共用一份文案）
+  goTravel() {
+    travel.showTravelGuide()
+  },
+
   callService() {
     // 演示号码，上线前请替换为真实服务电话
     wx.makePhoneCall({ phoneNumber: '02156860000' })
@@ -92,11 +99,18 @@ Page({
 
   showAbout() {
     wx.showModal({
-      title: '关于我们',
+      title: '罗店镇印象',
       content:
-        '「游罗店」面向上海市宝山区罗店镇，提供古镇景点导览、精品路线推荐与本地农产品选购。\n\n' +
-        '罗店旧称“金罗店”，古镇已有 700 余年历史，以端午龙船与罗店彩灯两项非遗闻名，' +
-        '并有千亩农田、美兰湖小镇与练祁河上的古桥。\n\n' +
+        '罗店镇隶属上海市宝山区，位于宝山区西北部，地处宝山、嘉定与江苏太仓三地交界处，' +
+        '区域面积约 44.19 平方公里，是上海的北大门。\n\n' +
+        '镇名相传源自元代商人罗升在此开店设旅舍、渐成集市，因而又称“罗溪”。' +
+        '明代罗店已是嘉定县七镇五市之首，是重要的棉花与棉布集散地，' +
+        '“金罗店、银南翔、铜江湾、铁大场”之说中位列首位。\n\n' +
+        '如今罗店形成“美兰湖、创新药、古镇韵、乡村风”的发展格局，' +
+        '文化上以“春有花神秋有画，夏有龙船冬有灯”的四季品牌著称：' +
+        '端午划龙船习俗已有 400 余年，2008 年入选国家级非物质文化遗产；' +
+        '罗店彩灯是上海市非物质文化遗产；花神节自 2017 年恢复。\n\n' +
+        '「游罗店」提供古镇景点导览、精品路线推荐与本地农产品选购，' +
         '景点开放时间、活动安排与产品信息请以官方发布为准。',
       showCancel: false,
       confirmText: '知道了'

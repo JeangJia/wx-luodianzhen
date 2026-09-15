@@ -289,6 +289,13 @@ button::after {
   padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
 }
 
+/* ---------- 卡片点击反馈 ---------- */
+/* 用法：<view class="card" hover-class="card-press" hover-stay-time="60"> */
+.card-press {
+  transform: scale(0.98);
+  box-shadow: 0 4rpx 14rpx rgba(38, 50, 56, 0.12);
+}
+
 /* ---------- 空状态 ---------- */
 .empty {
   display: flex;

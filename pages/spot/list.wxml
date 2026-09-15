@@ -35,8 +35,13 @@
       wx:key="id"
       bindtap="goDetail"
       data-id="{{item.id}}"
+      hover-class="card-press"
+      hover-stay-time="60"
     >
-      <view class="item-cover ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="item-cover ph ph-{{item.theme}}">
+        <image wx:if="{{item.cover}}" class="item-cover-img" src="{{item.cover}}" mode="aspectFill" />
+        <text wx:else>{{item.emoji}}</text>
+      </view>
       <view class="item-body flex1">
         <view class="row between">
           <text class="item-name ellipsis">{{item.name}}</text>

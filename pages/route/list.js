@@ -1,5 +1,11 @@
 // pages/route/list.js
 const { routes } = require('../../data/routes')
+const { toTagList } = require('../../utils/tagTone')
+
+// 预先算好每个标签的配色 tone，WXML 里直接绑定 class
+function decorate(list) {
+  return list.map(route => Object.assign({}, route, { tagList: toTagList(route.tags) }))
+}
 
 const filters = [
   { key: 'all', name: '全部' },
@@ -13,7 +19,7 @@ Page({
   data: {
     filters,
     active: 'all',
-    list: routes
+    list: decorate(routes)
   },
 
   onShow() {
@@ -31,7 +37,7 @@ Page({
       if (key === 'family') return item.tags.indexOf('亲子') > -1 || item.tags.indexOf('农事体验') > -1
       return true
     })
-    this.setData({ active: key, list })
+    this.setData({ active: key, list: decorate(list) })
   },
 
   goDetail(e) {

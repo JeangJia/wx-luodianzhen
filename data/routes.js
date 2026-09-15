@@ -1,13 +1,13 @@
 /**
  * 旅游路线数据 —— 上海市宝山区罗店镇
  * spotId 对应 data/spots.js 中的景点 id
- * 说明：以下为演示线路，门票、开放时间与活动安排请以官方最新公告为准
  */
 const routes = [
   {
     id: 'r1',
     name: '古镇古桥 · 非遗寻根一日游',
     emoji: '🏮',
+    cover: '/images/routes/r1.jpg',
     theme: 1,
     days: 1,
     tags: ['古镇人文', '非遗', '经典首推'],
@@ -36,6 +36,7 @@ const routes = [
     id: 'r2',
     name: '千亩田园 · 花海亲子一日游',
     emoji: '🌻',
+    cover: '/images/routes/r2.jpg',
     theme: 2,
     days: 1,
     tags: ['亲子', '农事体验', '花海'],
@@ -62,6 +63,7 @@ const routes = [
     id: 'r3',
     name: '古镇夜色 · 湖畔休闲二日游',
     emoji: '⛵',
+    cover: '/images/routes/r3.jpg',
     theme: 6,
     days: 2,
     tags: ['园林休闲', '夜游', '慢生活'],
@@ -98,6 +100,7 @@ const routes = [
     id: 'r4',
     name: '端午龙船 · 非遗文化二日游',
     emoji: '🐉',
+    cover: '/images/routes/r4.jpg',
     theme: 1,
     days: 2,
     tags: ['非遗', '民俗', '节庆'],
@@ -135,6 +138,7 @@ const routes = [
     id: 'r5',
     name: '罗店亲子研学二日游',
     emoji: '🎒',
+    cover: '/images/routes/r5.jpg',
     theme: 4,
     days: 2,
     tags: ['亲子', '研学', '农事体验'],
@@ -172,6 +176,7 @@ const routes = [
     id: 'r6',
     name: '花神故里 · 春日民俗一日游',
     emoji: '🌺',
+    cover: '/images/routes/r6.jpg',
     theme: 5,
     days: 1,
     tags: ['民俗', '非遗', '春季'],

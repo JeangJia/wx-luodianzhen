@@ -20,7 +20,11 @@ Page({
     keyword: '',
     list: [],
     cartCount: 0,
-    total: products.length
+    total: products.length,
+    // 排序栏滑动下划线
+    lineWidth: 0,
+    lineLeft: 0,
+    lineReady: false
   },
 
   onLoad() {
@@ -40,12 +44,65 @@ Page({
     }
   },
 
+  onReady() {
+    this.measureSortTabs()
+  },
+
+  onResize() {
+    // 屏幕尺寸变化后 tab 位置会变，重新测一次
+    this.measureSortTabs()
+  },
+
+  /**
+   * 滑动下划线要和文字同宽，写死宽度不行（每个 tab 字数不同），
+   * 所以用 boundingClientRect 实测每个 tab 的 left / width，
+   * 再换算成相对 .sort-bar 的偏移
+   */
+  measureSortTabs() {
+    wx.createSelectorQuery()
+      .selectAll('.sort')
+      .boundingClientRect()
+      .select('.sort-bar')
+      .boundingClientRect()
+      .exec(res => {
+        const tabs = res[0]
+        const bar = res[1]
+        if (!tabs || !tabs.length || !bar) return
+        this.sortTabs = tabs
+        this.sortBarLeft = bar.left
+        this.moveSortLine()
+      })
+  },
+
+  moveSortLine() {
+    const tabs = this.sortTabs
+    if (!tabs) return
+    const index = Math.max(0, this.data.sorts.findIndex(item => item.key === this.data.sort))
+    const rect = tabs[index]
+    if (!rect) return
+    this.setData({
+      lineWidth: rect.width,
+      lineLeft: rect.left - this.sortBarLeft
+    }, () => {
+      // 首次定位不参与过渡，否则下划线会从左侧"长"出来
+      if (!this.lineReady) {
+        this.lineReady = true
+        setTimeout(() => this.setData({ lineReady: true }), 60)
+      }
+    })
+  },
+
   onCategoryTap(e) {
     this.setData({ active: e.currentTarget.dataset.key }, () => this.filter())
   },
 
   onSortTap(e) {
-    this.setData({ sort: e.currentTarget.dataset.key }, () => this.filter())
+    const key = e.currentTarget.dataset.key
+    if (key === this.data.sort) return
+    this.setData({ sort: key }, () => {
+      this.filter()
+      this.moveSortLine()
+    })
   },
 
   onKeywordInput(e) {

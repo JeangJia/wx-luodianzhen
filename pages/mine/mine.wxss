@@ -152,11 +152,10 @@
   width: 84rpx;
   height: 84rpx;
   border-radius: 24rpx;
-  background: var(--bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 38rpx;
+  background-color: var(--bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 46rpx 46rpx;
 }
 
 .dot {
@@ -222,8 +221,82 @@
 }
 
 .cell-ico {
-  font-size: 34rpx;
+  flex-shrink: 0;
+  width: 40rpx;
+  height: 40rpx;
   margin-right: 20rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+/* ---------- 线性双色图标（与首页同一套规范：24×24 网格、线宽 1.7、正视图）
+   主色 黛瓦青 #2E6E6B   辅色 罗店金 #C8A24A
+-------------------------------------------------------------------------- */
+
+/* 订单入口 · 待付款（钱包 + 金币） */
+.order-ico--unpaid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.4 7.8h11.6a2.4 2.4 0 0 1 2.4 2.4v7.4a2.4 2.4 0 0 1-2.4 2.4H5.8a2.4 2.4 0 0 1-2.4-2.4z'/%3E%3Cpath d='M3.4 7.8V6.2a1.4 1.4 0 0 1 1.4-1.4h9.4'/%3E%3Ccircle cx='17.6' cy='14.2' r='3.6' stroke='%23C8A24A'/%3E%3Ccircle cx='17.6' cy='14.2' r='1.3' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 订单入口 · 待收货（包裹） */
+.order-ico--paid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.8 8.2 12 4.4l8.2 3.8v7.6L12 19.6l-8.2-3.8z'/%3E%3Cpath d='M3.8 8.2 12 12l8.2-3.8'/%3E%3Cpath d='M12 12v7.6' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 订单入口 · 已完成（对勾） */
+.order-ico--done {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.4'/%3E%3Cpath d='M8.2 12.3 11 15.1 16 9.6' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 订单入口 · 全部订单（单据） */
+.order-ico--all {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.4 3.6h8.2l4 4v12.8a1.6 1.6 0 0 1-1.6 1.6H6.4a1.6 1.6 0 0 1-1.6-1.6V5.2a1.6 1.6 0 0 1 1.6-1.6z'/%3E%3Cpath d='M14.6 3.6v4.2h4'/%3E%3Cpath d='M8.6 13h6.8M8.6 16.4h4.4' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 功能项 · 智能行程规划（日历） */
+.cell-ico--plan {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.4' y='5.2' width='17.2' height='15.2' rx='2.4'/%3E%3Cpath d='M3.4 10h17.2M8 3.2v4M16 3.2v4'/%3E%3Ccircle cx='12' cy='15.2' r='1.5' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 功能项 · 我的购物车 */
+.cell-ico--cart {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.8 4.8h2.4l2.8 10.6h10.4'/%3E%3Cpath d='M6.8 7.8h13.4l-2 6.6H8.6' stroke='%23C8A24A'/%3E%3Ccircle cx='10' cy='19.4' r='1.4'/%3E%3Ccircle cx='17.4' cy='19.4' r='1.4'/%3E%3C/svg%3E");
+}
+
+/* 功能项 · 景点导览（定位） */
+.cell-ico--spot {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20.6s6.4-5.4 6.4-10.2a6.4 6.4 0 1 0-12.8 0C5.6 15.2 12 20.6 12 20.6z'/%3E%3Ccircle cx='12' cy='10.2' r='2.4' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 功能项 · 农产品商城（菜篮） */
+.cell-ico--goods {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.4 8.4h17.2l-1.7 10.4a2 2 0 0 1-2 1.7H7.1a2 2 0 0 1-2-1.7z'/%3E%3Cpath d='M8.4 8.4 12 3.6l3.6 4.8'/%3E%3Cpath d='M9.6 12.4v4.4M14.4 12.4v4.4' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 功能项 · 出行指南（列车） */
+.cell-ico--travel {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.4 3.6h11.2a2.4 2.4 0 0 1 2.4 2.4v8a2.4 2.4 0 0 1-2.4 2.4H6.4A2.4 2.4 0 0 1 4 14V6a2.4 2.4 0 0 1 2.4-2.4z'/%3E%3Cpath d='M4 11.6h16'/%3E%3Ccircle cx='8.4' cy='7.8' r='1.2' stroke='%23C8A24A'/%3E%3Ccircle cx='15.6' cy='7.8' r='1.2' stroke='%23C8A24A'/%3E%3Cpath d='M8 16.4 6.4 20.2M16 16.4l1.6 3.8'/%3E%3C/svg%3E");
+}
+
+/* 服务项 · 联系客服（手机） */
+.cell-ico--service {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='6.4' y='2.8' width='11.2' height='18.4' rx='2.6'/%3E%3Cpath d='M10.6 5.8h2.8'/%3E%3Ccircle cx='12' cy='18' r='1.2' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 服务项 · 使用说明（书本） */
+.cell-ico--guide {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.4 4.6a1.6 1.6 0 0 1 1.6-1.6h11.6v18H6a1.6 1.6 0 0 1-1.6-1.6z'/%3E%3Cpath d='M4.4 16.6a1.6 1.6 0 0 1 1.6-1.6h11.6'/%3E%3Cpath d='M8.4 7.6h5.6M8.4 11h5.6' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 服务项 · 关于我们（信息） */
+.cell-ico--about {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.6'/%3E%3Ccircle cx='12' cy='8.2' r='1' stroke='%23C8A24A'/%3E%3Cpath d='M12 11.4v5.2' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 服务项 · 分享给好友 */
+.cell-ico--share {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.4v11.4'/%3E%3Cpath d='M8.2 7 12 3.4 15.8 7' stroke='%23C8A24A'/%3E%3Cpath d='M5.4 12.4v6.2a2 2 0 0 0 2 2h9.2a2 2 0 0 0 2-2v-6.2'/%3E%3C/svg%3E");
 }
 
 .cell-name {

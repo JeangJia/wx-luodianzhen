@@ -26,9 +26,13 @@
       wx:key="id"
       bindtap="goDetail"
       data-id="{{item.id}}"
+      hover-class="card-press"
+      hover-stay-time="60"
     >
       <view class="route-cover ph ph-{{item.theme}}">
-        <view class="route-emoji">{{item.emoji}}</view>
+        <image wx:if="{{item.cover}}" class="route-cover-img" src="{{item.cover}}" mode="aspectFill" />
+        <view class="route-cover-mask" wx:if="{{item.cover}}"></view>
+        <view class="route-emoji" wx:else>{{item.emoji}}</view>
         <view class="route-days">{{item.days}}天</view>
       </view>
       <view class="route-body">
@@ -49,7 +53,7 @@
           </view>
         </view>
         <view class="row" style="flex-wrap: wrap;">
-          <text class="tag tag-line route-tag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+          <text class="tag tag-{{t.tone}} route-tag" wx:for="{{item.tagList}}" wx:for-item="t" wx:key="text">{{t.text}}</text>
         </view>
       </view>
     </view>

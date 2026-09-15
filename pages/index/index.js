@@ -2,6 +2,7 @@
 const { spots } = require('../../data/spots')
 const { routes } = require('../../data/routes')
 const { products } = require('../../data/products')
+const { toTagList } = require('../../utils/tagTone')
 
 const app = getApp()
 
@@ -13,6 +14,7 @@ const banners = [
     type: 'spot',
     targetId: 's1',
     emoji: '🏯',
+    cover: '/images/scenic/罗店古镇老街.jpg',
     theme: 6,
     title: '金罗店 · 江南古镇',
     subtitle: '元代罗升开店成集，练祁河畔“三湾九街十八弄”'
@@ -22,6 +24,7 @@ const banners = [
     type: 'spot',
     targetId: 's5',
     emoji: '🐉',
+    cover: '/images/scenic/罗店龙船文化展示馆.jpg',
     theme: 1,
     title: '夏有龙船 · 冬有灯彩',
     subtitle: '400 余年端午龙船与竹骨彩灯，一门会发光的非遗'
@@ -31,6 +34,7 @@ const banners = [
     type: 'spot',
     targetId: 's7',
     emoji: '🌺',
+    cover: '/images/scenic/罗店花神堂.jpg',
     theme: 5,
     title: '春有花神 · 花神故里',
     subtitle: '农历二月十二花神庙会，2017 年恢复的春日民俗盛会'
@@ -40,6 +44,7 @@ const banners = [
     type: 'spot',
     targetId: 's8',
     emoji: '🌻',
+    cover: '/images/scenic/远景村千亩花田.jpg',
     theme: 2,
     title: '千亩花田 · 郊野罗店',
     subtitle: '油菜花与向日葵轮番盛开，花海小火车开进春天'
@@ -49,6 +54,7 @@ const banners = [
     type: 'product',
     targetId: 'p1',
     emoji: '🍡',
+    cover: '/images/goods/天花玉露霜.jpg',
     theme: 3,
     title: '罗店好物 · 产地直供',
     subtitle: '天花玉露霜、罗店鱼圆、千亩稻田新米，下单送到家'
@@ -56,23 +62,19 @@ const banners = [
 ]
 
 /**
- * 快捷入口：一行 6 个，共两行
+ * 快捷入口：一行 5 个，共两行
  * 注意：spot/list、product/list 是 tabBar 页面，wx.switchTab 不能带 url 参数，
  * 所以筛选条件通过 globalData 传递，由目标页 onShow 读取后清空。
  */
 const entries = [
-  { key: 'spot', icon: '🏯', name: '探景', path: '/pages/spot/list', tab: true },
-  { key: 'food', icon: '🐟', name: '寻味', path: '/pages/product/list', tab: true, filterKey: 'pendingProductCategory', filter: '水产熟食' },
-  { key: 'stay', icon: '⛵', name: '宿栖', path: '/pages/spot/detail?id=s11' },
-  { key: 'gift', icon: '🍡', name: '礼遇', path: '/pages/product/list', tab: true, filterKey: 'pendingProductCategory', filter: '非遗糕点' },
-  { key: 'leisure', icon: '🎋', name: '休闲', path: '/pages/spot/list', tab: true, filterKey: 'pendingSpotCategory', filter: '园林休闲' },
-  { key: 'traffic', icon: '🚇', name: '出行', action: 'traffic' },
-  { key: 'impression', icon: '📸', name: '印象', action: 'about' },
-  { key: 'culture', icon: '📖', name: '人文', path: '/pages/spot/list', tab: true, filterKey: 'pendingSpotCategory', filter: '古镇人文' },
-  { key: 'dragon', icon: '🐉', name: '龙船', path: '/pages/spot/detail?id=s5' },
-  { key: 'lantern', icon: '🏮', name: '彩灯', path: '/pages/spot/detail?id=s6' },
-  { key: 'flower', icon: '🌺', name: '花神', path: '/pages/spot/detail?id=s7' },
-  { key: 'farm', icon: '🌾', name: '农趣', path: '/pages/spot/list', tab: true, filterKey: 'pendingSpotCategory', filter: '田园农趣' }
+  { key: 'spot', icon: 'sight', name: '探景', path: '/pages/spot/list', tab: true },
+  { key: 'food', icon: 'food', name: '寻味', path: '/pages/product/list', tab: true, filterKey: 'pendingProductCategory', filter: '水产熟食' },
+  { key: 'stay', icon: 'stay', name: '宿栖', path: '/pages/spot/detail?id=s11' },
+  { key: 'gift', icon: 'gift', name: '礼遇', path: '/pages/product/list', tab: true, filterKey: 'pendingProductCategory', filter: '非遗糕点' },
+  { key: 'boat', icon: 'boat', name: '龙船', path: '/pages/spot/detail?id=s5' },
+  { key: 'lantern', icon: 'lantern', name: '彩灯', path: '/pages/spot/detail?id=s6' },
+  { key: 'flower', icon: 'flower', name: '花神', path: '/pages/spot/detail?id=s7' },
+  { key: 'farm', icon: 'farm', name: '农趣', path: '/pages/spot/list', tab: true, filterKey: 'pendingSpotCategory', filter: '田园农趣' }
 ]
 
 // 实时资讯（上下滚动轮播）
@@ -125,9 +127,13 @@ Page({
       .map(spot => Object.assign({}, spot, {
         features: (spot.highlights || []).slice(0, 3)
       }))
+    // 精选路线：预先算好每个标签的配色 tone，WXML 里直接绑定 class
+    const hotRoutes = routes.slice(0, 2).map(route => Object.assign({}, route, {
+      tagList: toTagList(route.tags)
+    }))
     this.setData({
       hotSpots,
-      hotRoutes: routes.slice(0, 2),
+      hotRoutes,
       hotProducts: products.slice(0, 4),
       stats: { spot: spots.length, route: routes.length, product: products.length }
     })
@@ -161,15 +167,6 @@ Page({
     const entry = entries.find(item => item.key === key)
     if (!entry) return
 
-    if (entry.action === 'traffic') {
-      this.showTraffic()
-      return
-    }
-    if (entry.action === 'about') {
-      this.showAbout()
-      return
-    }
-
     if (entry.filterKey) {
       app.globalData[entry.filterKey] = entry.filter
     }
@@ -178,52 +175,6 @@ Page({
     } else {
       wx.navigateTo({ url: entry.path })
     }
-  },
-
-  // 出行指南 + 一键导航
-  showTraffic() {
-    wx.showModal({
-      title: '出行指南',
-      content:
-        '罗店镇位于上海市宝山区西北部，地处宝山、嘉定与江苏太仓交界处，是上海的北大门。\n' +
-        '地铁：乘 7 号线至美兰湖站，出站步行或换乘公交前往古镇。\n' +
-        '公交：840 路、841 路、宝山 16 路、宝山 93 路等可达镇区。\n' +
-        '自驾：导航至「罗店古镇」，经沪太路、月罗公路进入镇区。\n' +
-        '提示：古镇老街路段较窄、车位有限，节假日建议公共交通前往。',
-      confirmText: '打开导航',
-      cancelText: '知道了',
-      success: res => {
-        if (res.confirm) {
-          wx.openLocation({
-            latitude: 31.4091,
-            longitude: 121.3502,
-            name: '罗店古镇',
-            address: '上海市宝山区罗店镇亭前街、塘西街一带',
-            scale: 14
-          })
-        }
-      }
-    })
-  },
-
-  showAbout() {
-    wx.showModal({
-      title: '罗店镇印象',
-      content:
-        '罗店镇隶属上海市宝山区，位于宝山区西北部，地处宝山、嘉定与江苏太仓三地交界处，' +
-        '区域面积约 44.19 平方公里，是上海的北大门。\n\n' +
-        '镇名相传源自元代商人罗升在此开店设旅舍、渐成集市，因而又称“罗溪”。' +
-        '明代罗店已是嘉定县七镇五市之首，是重要的棉花与棉布集散地，' +
-        '“金罗店、银南翔、铜江湾、铁大场”之说中位列首位。\n\n' +
-        '如今罗店形成“美兰湖、创新药、古镇韵、乡村风”的发展格局，' +
-        '文化上以“春有花神秋有画，夏有龙船冬有灯”的四季品牌著称：' +
-        '端午划龙船习俗已有 400 余年，2008 年入选国家级非物质文化遗产；' +
-        '罗店彩灯是上海市非物质文化遗产；花神节自 2017 年恢复。\n\n' +
-        '走进罗店，可走一走练祁河上的大通桥、丰德桥，' +
-        '逛一逛古镇老街与宝山寺，再到美兰湖吹吹湖风。',
-      showCancel: false,
-      confirmText: '知道了'
-    })
   },
 
   // 点击某条资讯

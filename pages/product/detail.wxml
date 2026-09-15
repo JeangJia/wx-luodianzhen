@@ -3,7 +3,8 @@
 
   <!-- 封面 -->
   <view class="cover ph ph-{{product.theme}}">
-    <text class="cover-emoji">{{product.emoji}}</text>
+    <image wx:if="{{product.cover}}" class="cover-img" src="{{product.cover}}" mode="aspectFill" />
+    <text class="cover-emoji" wx:else>{{product.emoji}}</text>
   </view>
 
   <view class="wrap">

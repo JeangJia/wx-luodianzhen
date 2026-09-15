@@ -3,7 +3,8 @@
 
   <!-- 封面 -->
   <view class="cover ph ph-{{spot.theme}}">
-    <view class="cover-emoji">{{spot.emoji}}</view>
+    <image wx:if="{{spot.cover}}" class="cover-img" src="{{spot.cover}}" mode="aspectFill" />
+    <view class="cover-emoji" wx:else>{{spot.emoji}}</view>
     <view class="cover-mask"></view>
     <view class="cover-text">
       <view class="cover-name">{{spot.name}}</view>

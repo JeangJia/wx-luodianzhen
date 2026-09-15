@@ -61,8 +61,7 @@
           bindtap="goOrders"
           data-status="{{item.key}}"
         >
-          <view class="order-ico">
-            <text>{{item.icon}}</text>
+          <view class="order-ico order-ico--{{item.key}}">
             <view class="dot" wx:if="{{item.key === 'unpaid' && counts.unpaid > 0}}">{{counts.unpaid}}</view>
           </view>
           <view class="order-name">{{item.name}}</view>
@@ -78,24 +77,29 @@
         <text class="block-title">常用功能</text>
       </view>
       <view class="cell" bindtap="goPlan">
-        <text class="cell-ico">🎯</text>
+        <view class="cell-ico cell-ico--plan"></view>
         <text class="cell-name flex1">智能行程规划</text>
         <text class="cell-arrow">›</text>
       </view>
       <view class="cell" bindtap="goCart">
-        <text class="cell-ico">🧺</text>
+        <view class="cell-ico cell-ico--cart"></view>
         <text class="cell-name flex1">我的购物车</text>
         <text class="cell-val" wx:if="{{cartCount > 0}}">{{cartCount}} 件</text>
         <text class="cell-arrow">›</text>
       </view>
       <view class="cell" bindtap="goSpotList">
-        <text class="cell-ico">🗺️</text>
+        <view class="cell-ico cell-ico--spot"></view>
         <text class="cell-name flex1">景点导览</text>
         <text class="cell-arrow">›</text>
       </view>
       <view class="cell" bindtap="goProductList">
-        <text class="cell-ico">🌾</text>
+        <view class="cell-ico cell-ico--goods"></view>
         <text class="cell-name flex1">农产品商城</text>
+        <text class="cell-arrow">›</text>
+      </view>
+      <view class="cell" bindtap="goTravel">
+        <view class="cell-ico cell-ico--travel"></view>
+        <text class="cell-name flex1">出行指南</text>
         <text class="cell-arrow">›</text>
       </view>
     </view>
@@ -108,23 +112,23 @@
         <text class="block-title">服务与帮助</text>
       </view>
       <view class="cell" bindtap="callService">
-        <text class="cell-ico">☎️</text>
+        <view class="cell-ico cell-ico--service"></view>
         <text class="cell-name flex1">联系客服</text>
-        <text class="cell-val">0712-7622000</text>
+        <text class="cell-val">021-56860000</text>
         <text class="cell-arrow">›</text>
       </view>
       <view class="cell" bindtap="showGuide">
-        <text class="cell-ico">📖</text>
+        <view class="cell-ico cell-ico--guide"></view>
         <text class="cell-name flex1">使用说明</text>
         <text class="cell-arrow">›</text>
       </view>
       <view class="cell" bindtap="showAbout">
-        <text class="cell-ico">ℹ️</text>
+        <view class="cell-ico cell-ico--about"></view>
         <text class="cell-name flex1">关于我们</text>
         <text class="cell-arrow">›</text>
       </view>
       <view class="cell cell-share">
-        <text class="cell-ico">📤</text>
+        <view class="cell-ico cell-ico--share"></view>
         <text class="cell-name flex1">分享给好友</text>
         <text class="cell-arrow">›</text>
         <button class="share-hit" open-type="share"></button>

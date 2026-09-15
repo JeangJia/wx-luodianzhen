@@ -66,9 +66,10 @@
 }
 
 .sort-bar {
+  position: relative;
   display: flex;
   align-items: center;
-  padding: 18rpx 24rpx 14rpx;
+  padding: 18rpx 24rpx 22rpx;
 }
 
 .sort {
@@ -77,9 +78,25 @@
   margin-right: 40rpx;
 }
 
+/* 选中态只换颜色、不加粗：加粗会改变字宽，下划线就对不齐了 */
 .sort-on {
   color: var(--primary);
-  font-weight: 700;
+}
+
+/* 滑动下划线：left/width 由 JS 实测后写入，这里只负责样式与过渡 */
+.sort-line {
+  position: absolute;
+  left: 0;
+  bottom: 14rpx;
+  height: 6rpx;
+  border-radius: 3rpx;
+  background: var(--primary);
+}
+
+/* 首次定位完成后再开启过渡，避免下划线从左侧“长”出来 */
+.sort-line-on {
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .wrapper {
@@ -100,7 +117,17 @@
 .goods-cover {
   position: relative;
   height: 260rpx;
+  overflow: hidden;
   font-size: 96rpx;
+}
+
+.goods-cover-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .goods-emoji {
@@ -111,6 +138,7 @@
   position: absolute;
   left: 0;
   top: 0;
+  z-index: 1;
   font-size: 20rpx;
   color: #fff;
   background: rgba(0, 0, 0, 0.32);

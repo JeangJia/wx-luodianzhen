@@ -3,6 +3,8 @@
 
   <!-- 头部 -->
   <view class="head ph ph-{{route.theme}}">
+    <image wx:if="{{route.cover}}" class="head-bg" src="{{route.cover}}" mode="aspectFill" />
+    <view class="head-mask" wx:if="{{route.cover}}"></view>
     <view class="head-emoji">{{route.emoji}}</view>
     <view class="head-info">
       <view class="head-name">{{route.name}}</view>

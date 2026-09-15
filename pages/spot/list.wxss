@@ -67,10 +67,17 @@
   font-weight: 600;
 }
 
+/* 用 margin 而不是 padding：.wrap 已经负责左右 24rpx 内边距，
+   两者都用 padding 会互相覆盖，文字就会顶到屏幕左边 */
 .count {
   font-size: 23rpx;
   color: var(--text-3);
-  padding: 18rpx 0 14rpx;
+  margin: 18rpx 0 14rpx;
+}
+
+/* 底部固定操作栏 + 自定义 TabBar 是叠在一起的，内容留白要同时让开两者 */
+.page.has-bottom {
+  padding-bottom: calc(250rpx + env(safe-area-inset-bottom));
 }
 
 .item {
@@ -80,11 +87,22 @@
 }
 
 .item-cover {
+  position: relative;
   width: 200rpx;
   height: 200rpx;
   border-radius: 18rpx;
   flex-shrink: 0;
+  overflow: hidden;
   font-size: 76rpx;
+}
+
+.item-cover-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .item-body {

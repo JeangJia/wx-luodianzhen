@@ -31,6 +31,11 @@
         bindtap="onSortTap"
         data-key="{{item.key}}"
       >{{item.name}}</view>
+      <!-- 滑动下划线：宽度与上方文字同宽，切换时平移到选中项 -->
+      <view
+        class="sort-line {{lineReady ? 'sort-line-on' : ''}}"
+        style="width: {{lineWidth}}px; transform: translateX({{lineLeft}}px);"
+      ></view>
     </view>
   </view>
 
@@ -44,7 +49,8 @@
         data-id="{{item.id}}"
       >
         <view class="goods-cover ph ph-{{item.theme}}">
-          <text class="goods-emoji">{{item.emoji}}</text>
+          <image wx:if="{{item.cover}}" class="goods-cover-img" src="{{item.cover}}" mode="aspectFill" />
+          <text class="goods-emoji" wx:else>{{item.emoji}}</text>
           <view class="goods-badge" wx:if="{{item.tags[0]}}">{{item.tags[0]}}</view>
         </view>
         <view class="goods-body">
