@@ -67,7 +67,7 @@ Page({
       key: 'buy_' + Date.now(),
       id: product.id,
       name: product.name,
-      emoji: product.emoji,
+      cover: product.cover,
       theme: product.theme,
       spec: this.currentSpec(),
       price: product.price,

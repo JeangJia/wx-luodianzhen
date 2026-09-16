@@ -27,7 +27,7 @@ function add(product, spec, qty) {
       key,
       id: product.id,
       name: product.name,
-      emoji: product.emoji,
+      cover: product.cover,
       theme: product.theme,
       spec: spec || (product.specs && product.specs[0]) || '',
       price: product.price,

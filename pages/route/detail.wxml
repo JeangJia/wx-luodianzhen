@@ -5,7 +5,6 @@
   <view class="head ph ph-{{route.theme}}">
     <image wx:if="{{route.cover}}" class="head-bg" src="{{route.cover}}" mode="aspectFill" />
     <view class="head-mask" wx:if="{{route.cover}}"></view>
-    <view class="head-emoji">{{route.emoji}}</view>
     <view class="head-info">
       <view class="head-name">{{route.name}}</view>
       <view class="head-tags row">
@@ -60,7 +59,9 @@
             <view class="tl-note" wx:if="{{it.note}}">{{it.note}}</view>
 
             <view class="tl-spot" wx:if="{{it.spot}}" bindtap="goSpot" data-id="{{it.spot.id}}">
-              <view class="tl-spot-ico ph ph-{{it.spot.theme}}">{{it.spot.emoji}}</view>
+              <view class="tl-spot-ico ph ph-{{it.spot.theme}} thumb">
+                <image wx:if="{{it.spot.cover}}" class="thumb-img" src="{{it.spot.cover}}" mode="aspectFill" />
+              </view>
               <view class="flex1">
                 <view class="tl-spot-name ellipsis">{{it.spot.name}}</view>
                 <view class="tl-spot-meta ellipsis">{{it.spot.town}} · 建议 {{it.spot.duration}}</view>
@@ -84,7 +85,9 @@
       <view class="sec-t">顺路带点伴手礼</view>
     </view>
     <view class="goods-row card" wx:for="{{relatedProducts}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
-      <view class="goods-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="goods-ico ph ph-{{item.theme}} thumb">
+        <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+      </view>
       <view class="flex1">
         <view class="goods-name ellipsis">{{item.name}}</view>
         <view class="goods-desc ellipsis">{{item.tags[0]}}</view>
@@ -96,11 +99,11 @@
   <!-- 底部 -->
   <view class="bottom-bar">
     <view class="bar-btn" bindtap="copyPlan">
-      <text class="bar-ico">📋</text>
+      <view class="ic ic-sm ic--list bar-ico"></view>
       <text class="bar-txt">复制</text>
     </view>
     <view class="bar-btn" bindtap="callService">
-      <text class="bar-ico">☎️</text>
+      <view class="ic ic-sm ic--phone bar-ico"></view>
       <text class="bar-txt">咨询</text>
     </view>
     <view class="btn btn-plain" bindtap="goPlan" style="margin-right: 16rpx;">自定义</view>

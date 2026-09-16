@@ -3,7 +3,7 @@
 
   <view class="top">
     <view class="search">
-      <text class="search-ico">🔍</text>
+      <view class="ic ic-sm ic--search search-ico"></view>
       <input
         class="search-input"
         value="{{keyword}}"
@@ -50,7 +50,6 @@
       >
         <view class="goods-cover ph ph-{{item.theme}}">
           <image wx:if="{{item.cover}}" class="goods-cover-img" src="{{item.cover}}" mode="aspectFill" />
-          <text class="goods-emoji" wx:else>{{item.emoji}}</text>
           <view class="goods-badge" wx:if="{{item.tags[0]}}">{{item.tags[0]}}</view>
         </view>
         <view class="goods-body">
@@ -72,13 +71,13 @@
     </view>
 
     <view class="empty" wx:if="{{list.length === 0}}">
-      <view class="empty-icon">🧺</view>
+      <view class="ic ic-xl ic--basket empty-icon"></view>
       <view>没有找到相关农产品</view>
     </view>
   </view>
 
   <view class="float-cart" bindtap="goCart">
-    <text class="float-ico">🧺</text>
+    <view class="ic ic-md ic--basket float-ico"></view>
     <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
   </view>
 </view>

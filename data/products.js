@@ -5,7 +5,6 @@ const products = [
   {
     id: 'p1',
     name: '天花玉露霜',
-    emoji: '🍡',
     cover: '/images/goods/天花玉露霜.jpg',
     theme: 3,
     category: '非遗糕点',
@@ -30,7 +29,6 @@ const products = [
   {
     id: 'p2',
     name: '罗店草头塌饼',
-    emoji: '🥮',
     cover: '/images/goods/罗店草头塌饼.jpg',
     theme: 2,
     category: '非遗糕点',
@@ -55,7 +53,6 @@ const products = [
   {
     id: 'p3',
     name: '罗店鱼圆',
-    emoji: '🐟',
     cover: '/images/goods/罗店鱼圆.jpg',
     theme: 4,
     category: '水产熟食',
@@ -80,7 +77,6 @@ const products = [
   {
     id: 'p4',
     name: '罗店白切羊肉',
-    emoji: '🍖',
     cover: '/images/goods/罗店白切羊肉.jpg',
     theme: 1,
     category: '水产熟食',
@@ -105,7 +101,6 @@ const products = [
   {
     id: 'p5',
     name: '罗店酱鸭',
-    emoji: '🦆',
     cover: '/images/goods/罗店酱鸭.jpg',
     theme: 6,
     category: '水产熟食',
@@ -130,7 +125,6 @@ const products = [
   {
     id: 'p6',
     name: '公大酱菜礼盒',
-    emoji: '🫙',
     cover: '/images/goods/公大酱菜礼盒.jpg',
     theme: 4,
     category: '酱制调味',
@@ -155,7 +149,6 @@ const products = [
   {
     id: 'p7',
     name: '远景村新米',
-    emoji: '🌾',
     cover: '/images/goods/远景村新米.jpg',
     theme: 2,
     category: '粮油米面',
@@ -180,7 +173,6 @@ const products = [
   {
     id: 'p8',
     name: '罗店菜籽油',
-    emoji: '🫗',
     cover: '/images/goods/罗店菜籽油.jpg',
     theme: 3,
     category: '粮油米面',
@@ -205,7 +197,6 @@ const products = [
   {
     id: 'p9',
     name: '罗店甜芦粟',
-    emoji: '🌿',
     cover: '/images/goods/罗店甜芦粟.jpg',
     theme: 2,
     category: '生鲜果蔬',
@@ -230,7 +221,6 @@ const products = [
   {
     id: 'p10',
     name: '罗店草莓',
-    emoji: '🍓',
     cover: '/images/goods/罗店草莓.jpg',
     theme: 5,
     category: '生鲜果蔬',

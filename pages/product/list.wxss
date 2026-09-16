@@ -23,7 +23,6 @@
 }
 
 .search-ico {
-  font-size: 28rpx;
   margin-right: 12rpx;
 }
 
@@ -130,10 +129,6 @@
   display: block;
 }
 
-.goods-emoji {
-  line-height: 1;
-}
-
 .goods-badge {
   position: absolute;
   left: 0;
@@ -202,15 +197,11 @@
   height: 108rpx;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 10rpx 30rpx rgba(199, 49, 43, 0.28);
+  box-shadow: 0 10rpx 30rpx rgba(46, 110, 107, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 30;
-}
-
-.float-ico {
-  font-size: 46rpx;
 }
 
 .badge {
@@ -221,7 +212,7 @@
   height: 36rpx;
   padding: 0 8rpx;
   border-radius: 18rpx;
-  background: var(--primary);
+  background: var(--red);
   color: #fff;
   font-size: 22rpx;
   font-weight: 700;

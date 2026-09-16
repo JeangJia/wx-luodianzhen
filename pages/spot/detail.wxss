@@ -15,11 +15,7 @@
   height: 100%;
 }
 
-.cover-emoji {
-  font-size: 180rpx;
-  line-height: 1;
-  opacity: 0.92;
-}
+
 
 .cover-mask {
   position: absolute;
@@ -46,8 +42,12 @@
 
 .cover-town {
   font-size: 24rpx;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.92);
   margin-top: 10rpx;
+}
+
+.cover-town-ico {
+  margin-right: 8rpx;
 }
 
 .cover-tags {
@@ -83,6 +83,10 @@
   font-size: 32rpx;
   font-weight: 700;
   color: var(--primary);
+}
+
+.ov-star {
+  margin-right: 6rpx;
 }
 
 .ov-num.small {
@@ -160,10 +164,9 @@
 }
 
 .point-ico {
-  color: var(--primary);
-  font-size: 24rpx;
   margin-right: 14rpx;
-  line-height: 1.7;
+  /* 与 27rpx/1.7 的文字首行视觉居中对齐 */
+  margin-top: 9rpx;
 }
 
 .point-txt {
@@ -180,9 +183,8 @@
 }
 
 .tip-ico {
-  font-size: 26rpx;
   margin-right: 12rpx;
-  line-height: 1.6;
+  margin-top: 4rpx;
 }
 
 .tip-txt {
@@ -213,7 +215,6 @@
   border-radius: 18rpx;
   flex-shrink: 0;
   margin-right: 22rpx;
-  font-size: 52rpx;
 }
 
 .route-name {
@@ -250,7 +251,6 @@
 
 .mini-cover {
   height: 150rpx;
-  font-size: 62rpx;
 }
 
 .mini-name {
@@ -273,7 +273,6 @@
   border-radius: 16rpx;
   flex-shrink: 0;
   margin-right: 20rpx;
-  font-size: 46rpx;
 }
 
 .goods-name {
@@ -297,8 +296,7 @@
 }
 
 .bar-ico {
-  font-size: 34rpx;
-  line-height: 1.2;
+  margin-bottom: 4rpx;
 }
 
 .bar-txt {

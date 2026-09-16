@@ -5,7 +5,7 @@
   <view class="head">
     <view class="avatar-wrap">
       <image wx:if="{{avatarUrl}}" class="avatar" src="{{avatarUrl}}" mode="aspectFill" />
-      <view wx:else class="avatar avatar-ph">🙂</view>
+      <view wx:else class="avatar avatar-ph"></view>
       <button class="avatar-hit" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar"></button>
     </view>
     <view class="head-info flex1">

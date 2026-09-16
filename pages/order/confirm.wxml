@@ -60,7 +60,9 @@
       </view>
 
       <view class="goods" wx:for="{{items}}" wx:key="key">
-        <view class="goods-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+        <view class="goods-ico ph ph-{{item.theme}} thumb">
+          <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+        </view>
         <view class="flex1">
           <view class="goods-name ellipsis">{{item.name}}</view>
           <view class="goods-spec ellipsis">{{item.spec}}</view>

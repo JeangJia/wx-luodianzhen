@@ -6,6 +6,14 @@ const { toTagList } = require('../../utils/tagTone')
 
 const app = getApp()
 
+// 景点分类 → 卡片左上角徽章用的线性图标
+const CAT_ICON = {
+  '古镇人文': 'cat-heritage',
+  '非遗民俗': 'cat-folk',
+  '田园农趣': 'cat-farm',
+  '园林休闲': 'cat-garden'
+}
+
 // 轮播：theme 对应 app.wxss 中的 .ph-1 ~ .ph-6
 // 1 龙船红 · 2 生态绿 · 3 罗店金 · 4 美兰湖蓝 · 5 花神粉 · 6 黛瓦青
 const banners = [
@@ -13,7 +21,6 @@ const banners = [
     id: 'b1',
     type: 'spot',
     targetId: 's1',
-    emoji: '🏯',
     cover: '/images/scenic/罗店古镇老街.jpg',
     theme: 6,
     title: '金罗店 · 江南古镇',
@@ -23,7 +30,6 @@ const banners = [
     id: 'b2',
     type: 'spot',
     targetId: 's5',
-    emoji: '🐉',
     cover: '/images/scenic/罗店龙船文化展示馆.jpg',
     theme: 1,
     title: '夏有龙船 · 冬有灯彩',
@@ -33,7 +39,6 @@ const banners = [
     id: 'b3',
     type: 'spot',
     targetId: 's7',
-    emoji: '🌺',
     cover: '/images/scenic/罗店花神堂.jpg',
     theme: 5,
     title: '春有花神 · 花神故里',
@@ -43,7 +48,6 @@ const banners = [
     id: 'b4',
     type: 'spot',
     targetId: 's8',
-    emoji: '🌻',
     cover: '/images/scenic/远景村千亩花田.jpg',
     theme: 2,
     title: '千亩花田 · 郊野罗店',
@@ -53,7 +57,6 @@ const banners = [
     id: 'b5',
     type: 'product',
     targetId: 'p1',
-    emoji: '🍡',
     cover: '/images/goods/天花玉露霜.jpg',
     theme: 3,
     title: '罗店好物 · 产地直供',
@@ -125,7 +128,8 @@ Page({
       .sort((a, b) => b.rating - a.rating)
       .slice(0, 6)
       .map(spot => Object.assign({}, spot, {
-        features: (spot.highlights || []).slice(0, 3)
+        features: (spot.highlights || []).slice(0, 3),
+        catIcon: CAT_ICON[spot.category] || 'cat-heritage'
       }))
     // 精选路线：预先算好每个标签的配色 tone，WXML 里直接绑定 class
     const hotRoutes = routes.slice(0, 2).map(route => Object.assign({}, route, {

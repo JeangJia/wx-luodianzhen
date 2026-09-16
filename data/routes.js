@@ -6,7 +6,6 @@ const routes = [
   {
     id: 'r1',
     name: '古镇古桥 · 非遗寻根一日游',
-    emoji: '🏮',
     cover: '/images/routes/r1.jpg',
     theme: 1,
     days: 1,
@@ -35,7 +34,6 @@ const routes = [
   {
     id: 'r2',
     name: '千亩田园 · 花海亲子一日游',
-    emoji: '🌻',
     cover: '/images/routes/r2.jpg',
     theme: 2,
     days: 1,
@@ -62,7 +60,6 @@ const routes = [
   {
     id: 'r3',
     name: '古镇夜色 · 湖畔休闲二日游',
-    emoji: '⛵',
     cover: '/images/routes/r3.jpg',
     theme: 6,
     days: 2,
@@ -99,7 +96,6 @@ const routes = [
   {
     id: 'r4',
     name: '端午龙船 · 非遗文化二日游',
-    emoji: '🐉',
     cover: '/images/routes/r4.jpg',
     theme: 1,
     days: 2,
@@ -137,7 +133,6 @@ const routes = [
   {
     id: 'r5',
     name: '罗店亲子研学二日游',
-    emoji: '🎒',
     cover: '/images/routes/r5.jpg',
     theme: 4,
     days: 2,
@@ -175,7 +170,6 @@ const routes = [
   {
     id: 'r6',
     name: '花神故里 · 春日民俗一日游',
-    emoji: '🌺',
     cover: '/images/routes/r6.jpg',
     theme: 5,
     days: 1,

@@ -2,7 +2,7 @@
 <view class="page has-bottom">
   <view class="search-wrap">
     <view class="search">
-      <text class="search-ico">🔍</text>
+      <view class="ic ic-sm ic--search search-ico"></view>
       <input
         class="search-input"
         value="{{keyword}}"
@@ -11,7 +11,7 @@
         bindinput="onKeywordInput"
         confirm-type="search"
       />
-      <text class="search-clear" wx:if="{{keyword}}" bindtap="clearKeyword">✕</text>
+      <view class="ic ic-sm ic--close search-clear" wx:if="{{keyword}}" bindtap="clearKeyword"></view>
     </view>
     <scroll-view class="chips" scroll-x enhanced show-scrollbar="{{false}}">
       <view class="chips-inner">
@@ -40,7 +40,6 @@
     >
       <view class="item-cover ph ph-{{item.theme}}">
         <image wx:if="{{item.cover}}" class="item-cover-img" src="{{item.cover}}" mode="aspectFill" />
-        <text wx:else>{{item.emoji}}</text>
       </view>
       <view class="item-body flex1">
         <view class="row between">
@@ -51,7 +50,10 @@
         </view>
         <view class="item-meta row between">
           <text class="item-town ellipsis">{{item.town}}</text>
-          <text class="item-score">★ {{item.rating}}</text>
+          <view class="item-score row">
+            <view class="ic ic-xs ic--star item-score-ico"></view>
+            <text>{{item.rating}}</text>
+          </view>
         </view>
         <view class="item-foot row between">
           <text class="item-ticket ellipsis">{{item.ticket}}</text>
@@ -61,7 +63,7 @@
     </view>
 
     <view class="empty" wx:if="{{list.length === 0}}">
-      <view class="empty-icon">🧭</view>
+      <view class="ic ic-xl ic--compass empty-icon"></view>
       <view>没有找到匹配的景点，换个关键词试试</view>
     </view>
   </view>

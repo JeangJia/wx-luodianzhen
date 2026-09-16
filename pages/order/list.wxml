@@ -18,7 +18,9 @@
       </view>
 
       <view class="order-goods" wx:for="{{item.items}}" wx:for-item="g" wx:key="key">
-        <view class="g-ico ph ph-{{g.theme}}">{{g.emoji}}</view>
+        <view class="g-ico ph ph-{{g.theme}} thumb">
+          <image wx:if="{{g.cover}}" class="thumb-img" src="{{g.cover}}" mode="aspectFill" />
+        </view>
         <view class="flex1">
           <view class="g-name ellipsis">{{g.name}}</view>
           <view class="g-spec ellipsis">{{g.spec}}</view>
@@ -84,7 +86,7 @@
     </view>
 
     <view class="empty" wx:if="{{list.length === 0}}">
-      <view class="empty-icon">📦</view>
+      <view class="ic ic-xl ic--package empty-icon"></view>
       <view>还没有相关订单</view>
       <view class="btn btn-primary" style="margin-top: 40rpx;" bindtap="goShopping">去逛逛农产品</view>
     </view>

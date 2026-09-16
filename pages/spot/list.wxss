@@ -19,7 +19,6 @@
 }
 
 .search-ico {
-  font-size: 28rpx;
   margin-right: 12rpx;
 }
 
@@ -34,9 +33,7 @@
 }
 
 .search-clear {
-  font-size: 26rpx;
-  color: var(--text-3);
-  padding-left: 16rpx;
+  margin-left: 16rpx;
 }
 
 .chips {
@@ -139,8 +136,12 @@
 
 .item-score {
   font-size: 23rpx;
-  color: var(--gold);
+  color: var(--gold-deep);
   font-weight: 600;
+}
+
+.item-score-ico {
+  margin-right: 6rpx;
 }
 
 .item-foot {

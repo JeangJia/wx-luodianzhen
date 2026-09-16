@@ -4,11 +4,13 @@
   <!-- 封面 -->
   <view class="cover ph ph-{{spot.theme}}">
     <image wx:if="{{spot.cover}}" class="cover-img" src="{{spot.cover}}" mode="aspectFill" />
-    <view class="cover-emoji" wx:else>{{spot.emoji}}</view>
     <view class="cover-mask"></view>
     <view class="cover-text">
       <view class="cover-name">{{spot.name}}</view>
-      <view class="cover-town">📍 {{spot.town}}</view>
+      <view class="cover-town row">
+        <view class="ic ic-xs ic--pin-light cover-town-ico"></view>
+        <text>{{spot.town}}</text>
+      </view>
       <view class="cover-tags row">
         <text class="tag cover-tag" wx:for="{{spot.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
       </view>
@@ -18,7 +20,10 @@
   <!-- 概览 -->
   <view class="card overview">
     <view class="ov-item">
-      <view class="ov-num">★ {{spot.rating}}</view>
+      <view class="ov-num row">
+        <view class="ic ic-xs ic--star ov-star"></view>
+        <text>{{spot.rating}}</text>
+      </view>
       <view class="ov-lbl">游客评分</view>
     </view>
     <view class="ov-line"></view>
@@ -75,7 +80,7 @@
     <view class="card block">
       <view class="block-title">特色亮点</view>
       <view class="point" wx:for="{{spot.highlights}}" wx:key="*this">
-        <text class="point-ico">✦</text>
+        <view class="ic ic-xs ic--diamond point-ico"></view>
         <text class="point-txt">{{item}}</text>
       </view>
     </view>
@@ -86,7 +91,7 @@
     <view class="card block">
       <view class="block-title">游玩贴士</view>
       <view class="tip" wx:for="{{spot.tips}}" wx:key="*this">
-        <text class="tip-ico">💡</text>
+        <view class="ic ic-sm ic--bulb tip-ico"></view>
         <text class="tip-txt">{{item}}</text>
       </view>
     </view>
@@ -115,7 +120,9 @@
         bindtap="goRoute"
         data-id="{{item.id}}"
       >
-        <view class="route-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+        <view class="route-ico ph ph-{{item.theme}} thumb">
+          <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+        </view>
         <view class="flex1">
           <view class="row between">
             <text class="route-name ellipsis">{{item.name}}</text>
@@ -140,7 +147,9 @@
         bindtap="goSpot"
         data-id="{{item.id}}"
       >
-        <view class="mini-cover ph ph-{{item.theme}}">{{item.emoji}}</view>
+        <view class="mini-cover ph ph-{{item.theme}} thumb">
+          <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+        </view>
         <view class="mini-name ellipsis">{{item.name}}</view>
       </view>
     </view>
@@ -152,7 +161,9 @@
   </view>
   <view class="wrap">
     <view class="goods-row card" wx:for="{{relatedProducts}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
-      <view class="goods-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="goods-ico ph ph-{{item.theme}} thumb">
+        <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+      </view>
       <view class="flex1">
         <view class="goods-name ellipsis">{{item.name}}</view>
         <view class="goods-desc ellipsis">{{item.origin}}</view>
@@ -164,11 +175,11 @@
   <!-- 底部操作 -->
   <view class="bottom-bar">
     <view class="bar-btn" bindtap="callSpot">
-      <text class="bar-ico">☎️</text>
+      <view class="ic ic-sm ic--phone bar-ico"></view>
       <text class="bar-txt">咨询</text>
     </view>
     <view class="bar-btn" bindtap="goPlan">
-      <text class="bar-ico">🧭</text>
+      <view class="ic ic-sm ic--compass bar-ico"></view>
       <text class="bar-txt">规划</text>
     </view>
     <view class="btn btn-primary flex1" bindtap="openMap" style="margin-left: 16rpx;">导航前往</view>

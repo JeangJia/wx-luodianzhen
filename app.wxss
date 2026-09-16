@@ -296,6 +296,24 @@ button::after {
   box-shadow: 0 4rpx 14rpx rgba(38, 50, 56, 0.12);
 }
 
+/* ---------- 缩略图 ----------
+ * 和 .ph-N 渐变底配合使用：有 cover 就铺满图片，没有就露出渐变底
+ * 用法：<view class="ph ph-2 thumb"><image class="thumb-img" .../></view>
+ * ------------------------------------------------------ */
+.thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.thumb-img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 /* ---------- 空状态 ---------- */
 .empty {
   display: flex;
@@ -306,8 +324,121 @@ button::after {
   font-size: 26rpx;
 }
 
+/* 空状态图标：与 .ic .ic-xl 搭配，这里只负责间距 */
 .empty-icon {
-  font-size: 100rpx;
-  line-height: 1;
   margin-bottom: 24rpx;
+}
+
+/* ---------- 全局线性图标库 ----------
+ * 统一规范：24×24 网格 / stroke-width 1.7 / 圆头圆角 / 正视图
+ * 主色 黛瓦青 #2E6E6B   辅色 罗店金 #C8A24A
+ * 用法：<view class="ic ic-sm ic--search"></view>
+ * 尺寸档：ic-xs 28 / ic-sm 36 / ic-md 48 / ic-lg 72 / ic-xl 100（rpx）
+ * ------------------------------------------------------------ */
+.ic {
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+}
+
+.ic-xs { width: 28rpx; height: 28rpx; }
+.ic-sm { width: 36rpx; height: 36rpx; }
+.ic-md { width: 48rpx; height: 48rpx; }
+.ic-lg { width: 72rpx; height: 72rpx; }
+.ic-xl { width: 100rpx; height: 100rpx; }
+.ic-xxl { width: 120rpx; height: 120rpx; }
+
+/* --- 功能图标 --- */
+
+/* 搜索 */
+.ic--search {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='10.4' cy='10.4' r='6.4'/%3E%3Cpath d='M15.2 15.2 20.6 20.6' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 菜篮（购物车 / 农产品） */
+.ic--basket {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.4 8.4h17.2l-1.7 10.4a2 2 0 0 1-2 1.7H7.1a2 2 0 0 1-2-1.7z'/%3E%3Cpath d='M8.4 8.4 12 3.6l3.6 4.8'/%3E%3Cpath d='M9.6 12.4v4.4M14.4 12.4v4.4' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 指南针（空状态） */
+.ic--compass {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.4'/%3E%3Cpath d='M15.4 8.6 13.6 13.6 8.6 15.4 10.4 10.4z' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 包裹（订单） */
+.ic--package {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.8 8.2 12 4.4l8.2 3.8v7.6L12 19.6l-8.2-3.8z'/%3E%3Cpath d='M3.8 8.2 12 12l8.2-3.8'/%3E%3Cpath d='M12 12v7.6' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 定位 */
+.ic--pin {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20.6s6.4-5.4 6.4-10.2a6.4 6.4 0 1 0-12.8 0C5.6 15.2 12 20.6 12 20.6z'/%3E%3Ccircle cx='12' cy='10.2' r='2.4' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 灯泡（贴士） */
+.ic--bulb {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 14.6a5.6 5.6 0 1 1 6 0c-.4.5-.6 1.1-.6 1.7v1.3H9.6v-1.3c0-.6-.2-1.2-.6-1.7z'/%3E%3Cpath d='M9.8 20.4h4.4' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 电话（客服 / 咨询） */
+.ic--phone {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='6.4' y='2.8' width='11.2' height='18.4' rx='2.6'/%3E%3Cpath d='M10.6 5.8h2.8'/%3E%3Ccircle cx='12' cy='18' r='1.2' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 清单（行程） */
+.ic--list {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.4 4.4H6.6a1.8 1.8 0 0 0-1.8 1.8v13.4a1.8 1.8 0 0 0 1.8 1.8h10.8a1.8 1.8 0 0 0 1.8-1.8V6.2a1.8 1.8 0 0 0-1.8-1.8h-1.8'/%3E%3Crect x='8.4' y='2.6' width='7.2' height='3.6' rx='1.2'/%3E%3Cpath d='M9 11.6h6M9 15.2h3.6' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 金色菱形（特色亮点项目符号） */
+.ic--diamond {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4.4 19.6 12 12 19.6 4.4 12z' fill='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 定位 · 深色底用白色版 */
+.ic--pin-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20.6s6.4-5.4 6.4-10.2a6.4 6.4 0 1 0-12.8 0C5.6 15.2 12 20.6 12 20.6z'/%3E%3Ccircle cx='12' cy='10.2' r='2.4'/%3E%3C/svg%3E");
+}
+
+/* 评分星 · 金色实心 */
+.ic--star {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z' fill='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 评分星 · 深色底用白色 */
+.ic--star-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+}
+
+/* 对勾 · 深色底用白色 */
+.ic--check-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.6 9.8 17.4 19 7.6'/%3E%3C/svg%3E");
+}
+
+/* 关闭（清除输入） */
+.ic--close {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239AA1A9' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.8 6.8 17.2 17.2M17.2 6.8 6.8 17.2'/%3E%3C/svg%3E");
+}
+
+/* --- 景点分类图标 --- */
+
+/* 古镇人文 · 亭台 */
+.ic--cat-heritage {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.4 10.4 12 4.9l8.6 5.5' stroke='%23C8A24A'/%3E%3Cpath d='M6.6 9.9V18.9'/%3E%3Cpath d='M12 8.4V18.9'/%3E%3Cpath d='M17.4 9.9V18.9'/%3E%3Cpath d='M3.2 19.4h17.6'/%3E%3C/svg%3E");
+}
+
+/* 非遗民俗 · 宫灯 */
+.ic--cat-folk {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2.8v3.4' stroke='%23C8A24A'/%3E%3Cpath d='M7.2 6.2h9.6'/%3E%3Cpath d='M12 6.2c3.2 0 5.4 2.2 5.4 4.9s-2.2 4.7-5.4 4.7-5.4-2-5.4-4.7 2.2-4.9 5.4-4.9z'/%3E%3Cpath d='M7.2 15.8h9.6'/%3E%3Cpath d='M12 15.8v4.6' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 田园农趣 · 稻穗 */
+.ic--cat-farm {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 20.6V8.8'/%3E%3Cpath d='M12 13.9c-2.9 0-4.1-1.9-4.1-4.1 2.9 0 4.1 1.9 4.1 4.1z'/%3E%3Cpath d='M12 13.9c2.9 0 4.1-1.9 4.1-4.1-2.9 0-4.1 1.9-4.1 4.1z'/%3E%3Cpath d='M12 8.8c-2.2 0-3.2-1.4-3.2-3.2 2.2 0 3.2 1.4 3.2 3.2z' stroke='%23C8A24A'/%3E%3Cpath d='M12 8.8c2.2 0 3.2-1.4 3.2-3.2-2.2 0-3.2 1.4-3.2 3.2z' stroke='%23C8A24A'/%3E%3C/svg%3E");
+}
+
+/* 园林休闲 · 月洞门 */
+.ic--cat-garden {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E6E6B' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.4 19.6v-4.4c0-4.2 3.4-7.6 7.6-7.6s7.6 3.4 7.6 7.6v4.4'/%3E%3Cpath d='M8.8 19.6v-6.2c0-1.8 1.4-3.2 3.2-3.2s3.2 1.4 3.2 3.2v6.2' stroke='%23C8A24A'/%3E%3Cpath d='M3 19.6h18'/%3E%3C/svg%3E");
 }

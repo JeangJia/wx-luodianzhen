@@ -97,7 +97,6 @@
 }
 
 .pref-ico {
-  font-size: 38rpx;
   margin-right: 14rpx;
 }
 
@@ -245,7 +244,6 @@
   border-radius: 14rpx;
   flex-shrink: 0;
   margin-right: 16rpx;
-  font-size: 38rpx;
 }
 
 .tl-name {

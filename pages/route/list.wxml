@@ -32,7 +32,6 @@
       <view class="route-cover ph ph-{{item.theme}}">
         <image wx:if="{{item.cover}}" class="route-cover-img" src="{{item.cover}}" mode="aspectFill" />
         <view class="route-cover-mask" wx:if="{{item.cover}}"></view>
-        <view class="route-emoji" wx:else>{{item.emoji}}</view>
         <view class="route-days">{{item.days}}天</view>
       </view>
       <view class="route-body">
@@ -59,7 +58,7 @@
     </view>
 
     <view class="empty" wx:if="{{list.length === 0}}">
-      <view class="empty-icon">🧭</view>
+      <view class="ic ic-xl ic--compass empty-icon"></view>
       <view>该分类下暂无路线</view>
     </view>
   </view>

@@ -6,7 +6,6 @@ const spots = [
   {
     id: 's1',
     name: '罗店古镇老街',
-    emoji: '🏮',
     cover: '/images/scenic/罗店古镇老街.jpg',
     theme: 1,
     category: '古镇人文',
@@ -29,7 +28,6 @@ const spots = [
   {
     id: 's2',
     name: '大通桥',
-    emoji: '🌉',
     cover: '/images/scenic/大通桥.jpg',
     theme: 6,
     category: '古镇人文',
@@ -52,7 +50,6 @@ const spots = [
   {
     id: 's3',
     name: '丰德桥',
-    emoji: '🪨',
     cover: '/images/scenic/丰德桥.jpg',
     theme: 6,
     category: '古镇人文',
@@ -75,7 +72,6 @@ const spots = [
   {
     id: 's4',
     name: '宝山寺',
-    emoji: '🏯',
     cover: '/images/scenic/宝山寺.jpg',
     theme: 3,
     category: '古镇人文',
@@ -98,7 +94,6 @@ const spots = [
   {
     id: 's5',
     name: '罗店龙船文化展示馆',
-    emoji: '🐉',
     cover: '/images/scenic/罗店龙船文化展示馆.jpg',
     theme: 1,
     category: '非遗民俗',
@@ -121,7 +116,6 @@ const spots = [
   {
     id: 's6',
     name: '罗店彩灯工坊',
-    emoji: '🏮',
     cover: '/images/scenic/罗店彩灯工坊.jpg',
     theme: 1,
     category: '非遗民俗',
@@ -144,7 +138,6 @@ const spots = [
   {
     id: 's7',
     name: '罗店花神堂',
-    emoji: '🌺',
     cover: '/images/scenic/罗店花神堂.jpg',
     theme: 5,
     category: '非遗民俗',
@@ -167,7 +160,6 @@ const spots = [
   {
     id: 's8',
     name: '远景村千亩花田',
-    emoji: '🌻',
     cover: '/images/scenic/远景村千亩花田.jpg',
     theme: 2,
     category: '田园农趣',
@@ -190,7 +182,6 @@ const spots = [
   {
     id: 's9',
     name: '塘湾村美丽田园',
-    emoji: '🌾',
     cover: '/images/scenic/塘湾村美丽田园.jpg',
     theme: 2,
     category: '田园农趣',
@@ -213,7 +204,6 @@ const spots = [
   {
     id: 's10',
     name: '东方假日田园',
-    emoji: '🚜',
     cover: '/images/scenic/东方假日田园.jpg',
     theme: 2,
     category: '田园农趣',
@@ -236,7 +226,6 @@ const spots = [
   {
     id: 's11',
     name: '美兰湖景区',
-    emoji: '⛵',
     cover: '/images/scenic/美兰湖景区.jpg',
     theme: 4,
     category: '园林休闲',
@@ -259,7 +248,6 @@ const spots = [
   {
     id: 's12',
     name: '闻道园',
-    emoji: '🎋',
     cover: '/images/scenic/闻道园.jpg',
     theme: 6,
     category: '园林休闲',
@@ -282,7 +270,6 @@ const spots = [
   {
     id: 's13',
     name: '“东西巷里”文旅商城',
-    emoji: '🏬',
     cover: '/images/scenic/东西巷里文旅商城.jpg',
     theme: 6,
     category: '古镇人文',
@@ -305,7 +292,6 @@ const spots = [
   {
     id: 's14',
     name: '四方村乡村文创园',
-    emoji: '🏭',
     cover: '/images/scenic/四方村乡村文创园.jpg',
     theme: 2,
     category: '田园农趣',

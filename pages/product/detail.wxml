@@ -4,7 +4,6 @@
   <!-- 封面 -->
   <view class="cover ph ph-{{product.theme}}">
     <image wx:if="{{product.cover}}" class="cover-img" src="{{product.cover}}" mode="aspectFill" />
-    <text class="cover-emoji" wx:else>{{product.emoji}}</text>
   </view>
 
   <view class="wrap">
@@ -22,7 +21,7 @@
         <text class="tag" wx:for="{{product.tags}}" wx:key="*this">{{item}}</text>
       </view>
       <view class="origin-row">
-        <text class="origin-ico">📍</text>
+        <view class="ic ic-sm ic--pin origin-ico"></view>
         <text class="origin-txt flex1">{{product.origin}}</text>
       </view>
     </view>
@@ -55,7 +54,7 @@
     <view class="card block">
       <view class="block-title">产品亮点</view>
       <view class="point" wx:for="{{product.highlights}}" wx:key="*this">
-        <text class="point-ico">✦</text>
+        <view class="ic ic-xs ic--diamond point-ico"></view>
         <text class="point-txt">{{item}}</text>
       </view>
     </view>
@@ -92,7 +91,9 @@
       <view class="sec-t">这些地方可以买到</view>
     </view>
     <view class="spot-row card" wx:for="{{relatedSpots}}" wx:key="id" bindtap="goSpot" data-id="{{item.id}}">
-      <view class="spot-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="spot-ico ph ph-{{item.theme}} thumb">
+        <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+      </view>
       <view class="flex1">
         <view class="spot-name ellipsis">{{item.name}}</view>
         <view class="spot-town ellipsis">{{item.town}}</view>
@@ -105,7 +106,9 @@
       <view class="sec-t">同类推荐</view>
     </view>
     <view class="rec card" wx:for="{{recommend}}" wx:key="id" bindtap="goProduct" data-id="{{item.id}}">
-      <view class="rec-ico ph ph-{{item.theme}}">{{item.emoji}}</view>
+      <view class="rec-ico ph ph-{{item.theme}} thumb">
+        <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+      </view>
       <view class="flex1">
         <view class="rec-name ellipsis">{{item.name}}</view>
         <view class="rec-tag ellipsis">{{item.tags[0]}}</view>
@@ -117,12 +120,12 @@
   <!-- 底部操作 -->
   <view class="bottom-bar">
     <view class="bar-btn" bindtap="goCart">
-      <text class="bar-ico">🧺</text>
+      <view class="ic ic-sm ic--basket bar-ico"></view>
       <text class="bar-txt">购物车</text>
       <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
     </view>
     <view class="bar-btn" bindtap="callService">
-      <text class="bar-ico">☎️</text>
+      <view class="ic ic-sm ic--phone bar-ico"></view>
       <text class="bar-txt">客服</text>
     </view>
     <view class="btn btn-plain" bindtap="addToCart" style="margin-left: 12rpx;">加入购物车</view>

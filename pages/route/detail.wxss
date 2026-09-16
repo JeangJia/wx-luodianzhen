@@ -25,20 +25,10 @@
   background: linear-gradient(110deg, rgba(18, 33, 32, 0.74) 0%, rgba(18, 33, 32, 0.44) 100%);
 }
 
-.head-emoji,
 .head-info {
   position: relative;
   z-index: 1;
-}
-
-.head-emoji {
-  font-size: 110rpx;
-  line-height: 1;
-}
-
-.head-info {
   flex: 1;
-  padding-left: 26rpx;
   color: #fff;
 }
 
@@ -218,7 +208,6 @@
   border-radius: 14rpx;
   flex-shrink: 0;
   margin-right: 16rpx;
-  font-size: 36rpx;
 }
 
 .tl-spot-name {
@@ -256,7 +245,6 @@
   border-radius: 16rpx;
   flex-shrink: 0;
   margin-right: 20rpx;
-  font-size: 46rpx;
 }
 
 .goods-name {
@@ -279,8 +267,7 @@
 }
 
 .bar-ico {
-  font-size: 34rpx;
-  line-height: 1.2;
+  margin-bottom: 4rpx;
 }
 
 .bar-txt {

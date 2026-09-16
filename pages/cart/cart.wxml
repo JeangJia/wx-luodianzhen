@@ -11,16 +11,18 @@
       <view class="item card" wx:for="{{list}}" wx:key="key">
         <view class="check" bindtap="onCheck" data-key="{{item.key}}">
           <view class="check-box {{item.checked ? 'check-on' : ''}}">
-            <text wx:if="{{item.checked}}">✓</text>
+            <view class="ic ic-xs ic--check-light" wx:if="{{item.checked}}"></view>
           </view>
         </view>
 
-        <view class="item-ico ph ph-{{item.theme}}" bindtap="goDetail" data-id="{{item.id}}">{{item.emoji}}</view>
+        <view class="item-ico ph ph-{{item.theme}} thumb" bindtap="goDetail" data-id="{{item.id}}">
+          <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+        </view>
 
         <view class="item-body flex1">
           <view class="row between">
             <text class="item-name ellipsis" bindtap="goDetail" data-id="{{item.id}}">{{item.name}}</text>
-            <text class="item-del" bindtap="onRemove" data-key="{{item.key}}">✕</text>
+            <view class="ic ic-sm ic--close item-del" bindtap="onRemove" data-key="{{item.key}}"></view>
           </view>
           <view class="item-spec ellipsis">{{item.spec}}</view>
           <view class="row between item-foot">
@@ -40,7 +42,7 @@
     <view class="bottom-bar">
       <view class="check-all" bindtap="onCheckAll">
         <view class="check-box {{allChecked ? 'check-on' : ''}}">
-          <text wx:if="{{allChecked}}">✓</text>
+          <view class="ic ic-xs ic--check-light" wx:if="{{allChecked}}"></view>
         </view>
         <text class="check-all-txt">全选</text>
       </view>
@@ -53,7 +55,7 @@
   </block>
 
   <view class="empty" wx:else>
-    <view class="empty-icon">🧺</view>
+    <view class="ic ic-xl ic--basket empty-icon"></view>
     <view>购物车还是空的</view>
     <view class="btn btn-primary" style="margin-top: 40rpx;" bindtap="goShopping">去逛逛农产品</view>
   </view>

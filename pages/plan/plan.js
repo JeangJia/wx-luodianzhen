@@ -3,11 +3,12 @@ const { spots } = require('../../data/spots')
 
 const dayOptions = [1, 2, 3]
 
+// icon 对应 app.wxss 里的 .ic--cat-* 线性图标
 const prefOptions = [
-  { key: '古镇人文', name: '古镇人文', icon: '🏮' },
-  { key: '非遗民俗', name: '非遗民俗', icon: '🐉' },
-  { key: '田园农趣', name: '田园农趣', icon: '🌾' },
-  { key: '园林休闲', name: '园林休闲', icon: '🎋' }
+  { key: '古镇人文', name: '古镇人文', icon: 'cat-heritage' },
+  { key: '非遗民俗', name: '非遗民俗', icon: 'cat-folk' },
+  { key: '田园农趣', name: '田园农趣', icon: 'cat-farm' },
+  { key: '园林休闲', name: '园林休闲', icon: 'cat-garden' }
 ]
 
 const groupOptions = [

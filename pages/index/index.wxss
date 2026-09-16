@@ -63,8 +63,14 @@
   justify-content: center;
 }
 
+/* 头部购物车图标：深青底上用白色描边 */
 .hero-cart-ico {
-  font-size: 36rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.4 8.4h17.2l-1.7 10.4a2 2 0 0 1-2 1.7H7.1a2 2 0 0 1-2-1.7z'/%3E%3Cpath d='M8.4 8.4 12 3.6l3.6 4.8'/%3E%3Cpath d='M9.6 12.4v4.4M14.4 12.4v4.4'/%3E%3C/svg%3E");
 }
 
 .badge {
@@ -94,7 +100,6 @@
 }
 
 .search-ico {
-  font-size: 28rpx;
   margin-right: 12rpx;
 }
 
@@ -140,15 +145,6 @@
     rgba(18, 33, 32, 0.4) 55%,
     rgba(18, 33, 32, 0.58) 100%
   );
-}
-
-/* 没有配图时的兜底 */
-.banner-emoji {
-  position: relative;
-  z-index: 1;
-  font-size: 120rpx;
-  line-height: 1;
-  opacity: 0.9;
 }
 
 .banner-text {
@@ -417,12 +413,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 34rpx;
-  line-height: 1;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 88,30 88,70 50,90 12,70 12,30' fill='%23FFFFFF' fill-opacity='0.94' stroke='%23FFFFFF' stroke-opacity='0.94' stroke-width='16' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* 徽章里的分类图标 */
+.spot-badge-ico {
+  width: 46rpx;
+  height: 46rpx;
 }
 
 /* 右上角评分 */
@@ -440,6 +440,10 @@
   font-weight: 600;
   display: flex;
   align-items: center;
+}
+
+.spot-score-ico {
+  margin-right: 6rpx;
 }
 
 .spot-cover-text {
