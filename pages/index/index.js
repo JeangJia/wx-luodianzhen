@@ -109,6 +109,12 @@ const notices = [
   }
 ]
 
+// 热门景点：滑到尾部空白区后再继续左滑，就进景点列表
+const HOT_RESIST = 0.5    // 阻尼：手指走 2px，内容才跟 1px
+const HOT_PULL = 45       // 拉伸到该值松手即触发（对应手指约 90px）
+const HOT_MAX = 130       // 最大拉伸距离（px）
+const HOT_LOADING = 700   // loading 过渡时长（ms）
+
 Page({
   data: {
     banners,
@@ -118,7 +124,12 @@ Page({
     hotRoutes: [],
     hotProducts: [],
     stats: { spot: 0, route: 0, product: 0 },
-    cartCount: 0
+    cartCount: 0,
+    // 热门景点“继续左滑”的橡皮筋与 loading 过渡
+    hotPull: 0,
+    hotTailOpacity: 1,
+    hotAwake: false,
+    hotLoading: false
   },
 
   onLoad() {
@@ -148,11 +159,120 @@ Page({
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 0 })
     }
+    // 从景点列表返回时，收起 loading 层
+    this.clearHotLoading()
+  },
+
+  onHide() {
+    // 切走时收起 loading 层，避免下次回来还盖着
+    this.clearHotLoading()
   },
 
   onPullDownRefresh() {
+    this.clearHotLoading()
     this.onLoad()
     wx.stopPullDownRefresh()
+  },
+
+  /* ---------- 热门景点：滑到最右端继续向左滑 → 跳转景点列表 ---------- */
+
+  onReady() {
+    // 量一次容器宽度，用于判断内容是否真的可滑（内容不够宽时不启用这个手势）
+    wx.createSelectorQuery()
+      .select('.hscroll')
+      .boundingClientRect()
+      .exec(res => {
+        if (res[0]) this.hotViewWidth = res[0].width
+      })
+  },
+
+  // 滚动过程中往回滑，就取消“已在末尾”的状态
+  onHotScroll(e) {
+    if (e.detail.deltaX >= 0) return
+    this.hotAtEnd = false
+    if (this.data.hotAwake) this.setData({ hotAwake: false })
+  },
+
+  // 滑到最右端：尾部空白区露出来，箭头开始跳动
+  onHotReachEnd(e) {
+    // 内容没有超出容器宽度时不存在“继续滑”的动作，不启用
+    if (this.hotViewWidth && e.detail.scrollWidth <= this.hotViewWidth + 20) return
+    this.hotAtEnd = true
+    if (!this.data.hotAwake) this.setData({ hotAwake: true })
+  },
+
+  onHotTouchStart(e) {
+    this.hotStartX = e.touches[0].clientX
+    // 手指按下时尾部空白区已经露出来了，说明这一次滑动就是“再滑一下”
+    this.hotFromEnd = !!this.hotAtEnd
+  },
+
+  // 跟手橡皮筋：手指走 2px 内容才走 1px，同时把提示“吸”淡
+  onHotTouchMove(e) {
+    if (!this.hotFromEnd || this.data.hotLoading) return
+    const dx = this.hotStartX - e.touches[0].clientX
+    if (dx <= 0) {
+      // 手指回滑，直接弹回去
+      if (this.data.hotPull) this.releaseHotPull()
+      return
+    }
+    const pull = Math.min(dx * HOT_RESIST, HOT_MAX)
+    // 位移太小就别重渲染了
+    if (Math.abs(pull - this.data.hotPull) < 1.2) return
+    this.setData({
+      hotPull: pull,
+      hotTailOpacity: Math.max(0, 1 - pull / (HOT_PULL * 2))
+    })
+  },
+
+  onHotTouchEnd(e) {
+    if (!this.hotFromEnd) return
+    this.hotFromEnd = false
+    const moved = this.hotStartX - e.changedTouches[0].clientX
+    // 拉够就进；兜底用手指位移判定，个别机型不上报 touchmove 也不会失效
+    if (this.data.hotPull >= HOT_PULL || moved > HOT_PULL / HOT_RESIST) {
+      this.enterSpotList()
+      return
+    }
+    this.releaseHotPull()
+  },
+
+  onHotTouchCancel() {
+    this.hotFromEnd = false
+    this.releaseHotPull()
+  },
+
+  // 没拉够，松手弹回原位（.hscroll-inner 的过渡自带过冲，所以是“弹”回去）
+  releaseHotPull() {
+    if (!this.data.hotPull && this.data.hotTailOpacity === 1) return
+    this.setData({ hotPull: 0, hotTailOpacity: 1 })
+  },
+
+  // 走一段 loading 过渡再跳，避免页面瞬间切换
+  enterSpotList() {
+    if (this.data.hotLoading) return
+    this.setData({
+      hotLoading: true,
+      hotPull: HOT_MAX,   // 顺着惯性再推一段，像被吸出去
+      hotTailOpacity: 0
+    })
+    this.hotTimer = setTimeout(() => {
+      wx.switchTab({
+        url: '/pages/spot/list',
+        // 万一没跳成功，把 loading 收回来，别把页面卡住
+        fail: () => this.clearHotLoading()
+      })
+    }, HOT_LOADING)
+  },
+
+  // 收起 loading 层并复位橡皮筋（切走 / 返回 / 下拉刷新都要清）
+  clearHotLoading() {
+    if (this.hotTimer) {
+      clearTimeout(this.hotTimer)
+      this.hotTimer = null
+    }
+    if (!this.data.hotLoading && !this.data.hotPull) return
+    this.setData({ hotLoading: false, hotPull: 0, hotTailOpacity: 1 })
   },
 
   onBannerTap(e) {

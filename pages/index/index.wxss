@@ -358,6 +358,124 @@
 .hscroll-inner {
   display: flex;
   padding: 0 24rpx;
+  /* 松手回弹：y 超过 1 会过冲一下，形成弹性 */
+  transition: transform 0.46s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* 跟手阶段关掉过渡，手指走到哪内容就到哪 */
+.hscroll-inner.is-drag {
+  transition: none;
+}
+
+/* 触发跳转时顺着惯性推出，不起伏，免得和 loading 打架 */
+.hscroll-inner.is-launch {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 尾部空白区：滑到底才露出来，作为“还能继续滑”的提示 */
+.hot-tail {
+  flex-shrink: 0;
+  width: 220rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.12s linear;
+}
+
+/* 箭头指向左，和“继续向左滑”的手势方向一致 */
+.hot-tail-arrow {
+  width: 18rpx;
+  height: 18rpx;
+  border-top: 4rpx solid var(--text-3);
+  border-right: 4rpx solid var(--text-3);
+  transform: rotate(-135deg);
+  opacity: 0.6;
+}
+
+.hot-tail-txt {
+  margin-top: 18rpx;
+  font-size: 22rpx;
+  letter-spacing: 1rpx;
+  color: var(--text-3);
+  opacity: 0.75;
+}
+
+/* 空白区露出来后，箭头持续往左顶，页面不至于“死”着 */
+.hot-tail.is-awake .hot-tail-arrow {
+  animation: tailNudge 1.4s ease-in-out infinite;
+}
+
+@keyframes tailNudge {
+  0%, 100% { transform: rotate(-135deg) translate(0, 0); }
+  50% { transform: rotate(-135deg) translate(3rpx, -3rpx); }
+}
+
+/* ---------- 进入景点列表的 loading 过渡层 ---------- */
+.page-loading {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+}
+
+.page-loading.is-on {
+  opacity: 1;
+}
+
+/* 外层只负责“弹出来”，内层负责旋转：两者都用 transform，
+   分开写才能让缩放的过渡不被旋转动画覆盖 */
+.pl-spinner {
+  width: 56rpx;
+  height: 56rpx;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+}
+
+.page-loading.is-on .pl-spinner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 缺口圆环，用 border 画，无限旋转 */
+.pl-spinner-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5rpx solid rgba(255, 255, 255, 0.24);
+  border-top-color: #fff;
+  animation: plSpin 0.8s linear infinite;
+}
+
+@keyframes plSpin {
+  to { transform: rotate(360deg); }
+}
+
+.pl-txt {
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  letter-spacing: 2rpx;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(18rpx);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) 0.06s,
+              opacity 0.3s ease 0.06s;
+}
+
+.page-loading.is-on .pl-txt {
+  opacity: 0.9;
+  transform: translateY(0);
 }
 
 .spot-card {

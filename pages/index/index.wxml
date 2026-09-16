@@ -107,8 +107,25 @@
     <view class="sec-t">热门景点</view>
     <view class="sec-more" bindtap="goSpotList">查看全部 ›</view>
   </view>
-  <scroll-view class="hscroll" scroll-x enhanced show-scrollbar="{{false}}">
-    <view class="hscroll-inner">
+  <!-- 滑到最后露出尾部空白区，继续左滑 → 弹性拉伸 + loading 过渡进景点列表 -->
+  <scroll-view
+    class="hscroll"
+    scroll-x
+    enhanced
+    bounces="{{false}}"
+    show-scrollbar="{{false}}"
+    lower-threshold="10"
+    bindscroll="onHotScroll"
+    bindscrolltolower="onHotReachEnd"
+    bindtouchstart="onHotTouchStart"
+    bindtouchmove="onHotTouchMove"
+    bindtouchend="onHotTouchEnd"
+    bindtouchcancel="onHotTouchCancel"
+  >
+    <view
+      class="hscroll-inner {{hotPull > 0 && !hotLoading ? 'is-drag' : ''}}{{hotLoading ? ' is-launch' : ''}}"
+      style="transform: translateX(-{{hotPull}}px)"
+    >
       <view
         class="spot-card card"
         wx:for="{{hotSpots}}"
@@ -149,6 +166,12 @@
           </view>
           <view class="spot-more">查看更多 ›</view>
         </view>
+      </view>
+
+      <!-- 尾部空白区：滑到底才露出来；继续拉动时会被“吸”淡 -->
+      <view class="hot-tail {{hotAwake ? 'is-awake' : ''}}" style="opacity: {{hotTailOpacity}}">
+        <view class="hot-tail-arrow"></view>
+        <view class="hot-tail-txt">全部景点</view>
       </view>
     </view>
   </scroll-view>
@@ -226,4 +249,10 @@
   </view>
 
   <view class="footer">罗店镇文旅 · 农产品服务平台</view>
+</view>
+
+<!-- 进入景点列表的 loading 过渡层：与景点页顶部同为黛瓦青，切换时不断层 -->
+<view class="page-loading {{hotLoading ? 'is-on' : ''}}">
+  <view class="pl-spinner"><view class="pl-spinner-ring"></view></view>
+  <view class="pl-txt">正在进入全部景点</view>
 </view>
