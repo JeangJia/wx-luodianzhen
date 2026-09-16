@@ -51,7 +51,7 @@
       </view>
 
       <view class="order-foot">
-        <view class="order-total flex1">
+        <view class="order-total">
           <text class="total-k">共 {{item.items.length}} 种商品 · 合计</text>
           <view class="price"><text class="price-sym">¥</text><text class="price-num">{{item.total}}</text></view>
         </view>
