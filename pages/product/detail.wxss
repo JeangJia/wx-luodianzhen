@@ -243,6 +243,28 @@
 }
 
 /* ---------- 底部 ---------- */
+/* 两端对齐：左侧图标区贴左，右侧按钮区贴右 */
+.bottom-bar {
+  justify-content: space-between;
+}
+
+.bar-icons {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.bar-acts {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.bar-acts .btn + .btn {
+  margin-left: 16rpx;
+}
+
 .bar-btn {
   position: relative;
   display: flex;

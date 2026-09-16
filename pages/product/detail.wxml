@@ -119,16 +119,23 @@
 
   <!-- 底部操作 -->
   <view class="bottom-bar">
-    <view class="bar-btn" bindtap="goCart">
-      <view class="ic ic-sm ic--basket bar-ico"></view>
-      <text class="bar-txt">购物车</text>
-      <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+    <!-- 左侧：购物车、客服，贴左边 -->
+    <view class="bar-icons">
+      <view class="bar-btn" bindtap="goCart">
+        <view class="ic ic-sm ic--basket bar-ico"></view>
+        <text class="bar-txt">购物车</text>
+        <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+      </view>
+      <view class="bar-btn" bindtap="callService">
+        <view class="ic ic-sm ic--phone bar-ico"></view>
+        <text class="bar-txt">客服</text>
+      </view>
     </view>
-    <view class="bar-btn" bindtap="callService">
-      <view class="ic ic-sm ic--phone bar-ico"></view>
-      <text class="bar-txt">客服</text>
+
+    <!-- 右侧：加购、购买，贴右边 -->
+    <view class="bar-acts">
+      <view class="btn btn-plain" bindtap="addToCart">加入购物车</view>
+      <view class="btn btn-primary" bindtap="buyNow">立即购买</view>
     </view>
-    <view class="btn btn-plain" bindtap="addToCart" style="margin-left: 12rpx;">加入购物车</view>
-    <view class="btn btn-primary" bindtap="buyNow" style="margin-left: 16rpx;">立即购买</view>
   </view>
 </view>
