@@ -7,7 +7,14 @@
       wx:key="key"
       bindtap="onTabTap"
       data-key="{{item.key}}"
-    >{{item.name}}</view>
+    >
+      <view class="tab-txt">{{item.name}}</view>
+    </view>
+    <!-- 滑动下划线：宽度与文字同宽，切换时平移到选中项 -->
+    <view
+      class="tabs-line {{lineReady ? 'tabs-line-on' : ''}}"
+      style="width: {{lineWidth}}px; transform: translateX({{lineLeft}}px);"
+    ></view>
   </view>
 
   <view class="wrap">

@@ -90,7 +90,8 @@ Page({
   },
 
   callService() {
-    wx.makePhoneCall({ phoneNumber: '07127622000' })
+    // 演示号码，上线前请替换为真实服务电话
+    wx.makePhoneCall({ phoneNumber: '02156860000' })
   },
 
   onShareAppMessage() {

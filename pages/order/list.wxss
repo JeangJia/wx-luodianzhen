@@ -14,7 +14,6 @@
   font-size: 27rpx;
   color: var(--text-2);
   padding: 26rpx 0;
-  position: relative;
 }
 
 .tab-on {
@@ -22,16 +21,25 @@
   font-weight: 700;
 }
 
-.tab-on::after {
-  content: '';
+/* 只占文字自身的宽度，供 JS 实测出下划线的尺寸 */
+.tab-txt {
+  display: inline-block;
+}
+
+/* 滑动下划线：left / width 由 JS 实测后写入，这里只负责样式与过渡 */
+.tabs-line {
   position: absolute;
-  left: 50%;
+  left: 0;
   bottom: 0;
-  transform: translateX(-50%);
-  width: 48rpx;
   height: 6rpx;
   border-radius: 3rpx;
   background: var(--primary);
+}
+
+/* 首次定位完成后再开启过渡，避免下划线从左侧“长”出来 */
+.tabs-line-on {
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .order {

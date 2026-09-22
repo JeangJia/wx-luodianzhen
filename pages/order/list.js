@@ -12,7 +12,11 @@ Page({
   data: {
     tabs,
     active: 'all',
-    list: []
+    list: [],
+    // tab 滑动下划线
+    lineWidth: 0,
+    lineLeft: 0,
+    lineReady: false
   },
 
   onLoad(options) {
@@ -23,8 +27,62 @@ Page({
     this.refresh()
   },
 
+  onReady() {
+    this.measureTabs()
+  },
+
+  onResize() {
+    // 屏幕尺寸变化后 tab 位置会变，重新测一次
+    this.measureTabs()
+  },
+
   onTabTap(e) {
-    this.setData({ active: e.currentTarget.dataset.key }, () => this.refresh())
+    const key = e.currentTarget.dataset.key
+    if (key === this.data.active) return
+    this.setData({ active: key }, () => {
+      this.refresh()
+      // 选中项是加粗的，字宽会比未选中时略宽，切完重测一次让下划线贴合
+      this.measureTabs()
+    })
+  },
+
+  /**
+   * 下划线要和文字同宽，写死宽度不行（“全部”两个字、“待付款”三个字），
+   * 所以用 boundingClientRect 实测每个 tab 文字的 left / width，
+   * 再换算成相对 .tabs 的偏移
+   */
+  measureTabs() {
+    wx.createSelectorQuery()
+      .selectAll('.tab-txt')
+      .boundingClientRect()
+      .select('.tabs')
+      .boundingClientRect()
+      .exec(res => {
+        const tabRects = res[0]
+        const bar = res[1]
+        if (!tabRects || !tabRects.length || !bar) return
+        this.tabRects = tabRects
+        this.tabsLeft = bar.left
+        this.moveTabLine()
+      })
+  },
+
+  moveTabLine() {
+    const rects = this.tabRects
+    if (!rects) return
+    const index = Math.max(0, this.data.tabs.findIndex(item => item.key === this.data.active))
+    const rect = rects[index]
+    if (!rect) return
+    this.setData({
+      lineWidth: rect.width,
+      lineLeft: rect.left - this.tabsLeft
+    }, () => {
+      // 首次定位不参与过渡，否则下划线会从左侧“长”出来
+      if (!this.lineReady) {
+        this.lineReady = true
+        setTimeout(() => this.setData({ lineReady: true }), 60)
+      }
+    })
   },
 
   refresh() {
@@ -81,7 +139,8 @@ Page({
   },
 
   callService() {
-    wx.makePhoneCall({ phoneNumber: '07127622000' })
+    // 演示号码，上线前请替换为真实服务电话
+    wx.makePhoneCall({ phoneNumber: '02156860000' })
   },
 
   copyOrderId(e) {
