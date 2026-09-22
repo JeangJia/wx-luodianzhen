@@ -192,7 +192,9 @@
 .float-cart {
   position: fixed;
   right: 32rpx;
-  bottom: calc(60rpx + env(safe-area-inset-bottom));
+  /* tabBar 占 100rpx + 安全区，抬到它上面再留 32rpx 间距，
+     否则会被 z-index 更高的 tabBar 盖住下半截 */
+  bottom: calc(132rpx + env(safe-area-inset-bottom));
   width: 108rpx;
   height: 108rpx;
   border-radius: 50%;

@@ -47,6 +47,15 @@ function updateStatus(id, status, statusText) {
   return saveOrders(list)
 }
 
+// 只改收货信息，订单的其他字段（商品、金额、时间、状态）一律不动
+function updateAddress(id, address) {
+  const list = getOrders().map(item => {
+    if (item.id === id) item.address = address
+    return item
+  })
+  return saveOrders(list)
+}
+
 function remove(id) {
   return saveOrders(getOrders().filter(item => item.id !== id))
 }
@@ -59,6 +68,7 @@ module.exports = {
   getOrders,
   create,
   updateStatus,
+  updateAddress,
   remove,
   countByStatus
 }

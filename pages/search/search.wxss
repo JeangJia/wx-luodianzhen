@@ -1,0 +1,123 @@
+/* pages/search/search.wxss */
+
+/* ---------- 顶部搜索栏 ---------- */
+.search-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  padding: 20rpx 24rpx 12rpx;
+}
+
+.search {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  height: 76rpx;
+  padding: 0 24rpx;
+  border-radius: 38rpx;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.search-ico {
+  margin-right: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  font-size: 27rpx;
+}
+
+.search-ph {
+  color: var(--text-3);
+  font-size: 26rpx;
+}
+
+.search-clear {
+  margin-left: 16rpx;
+}
+
+.search-cancel {
+  flex-shrink: 0;
+  padding-left: 24rpx;
+  font-size: 27rpx;
+  color: var(--text-2);
+}
+
+/* ---------- 热门搜索 ---------- */
+.hot-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hot-tag {
+  height: 64rpx;
+  line-height: 64rpx;
+  padding: 0 30rpx;
+  margin: 0 16rpx 16rpx 0;
+  border-radius: 32rpx;
+  background: #fff;
+  color: var(--text-2);
+  font-size: 26rpx;
+}
+
+/* ---------- 搜索结果 ---------- */
+.count {
+  padding-top: 4rpx;
+  font-size: 23rpx;
+  color: var(--text-3);
+}
+
+.r-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 和 .ph-N / .thumb 配合：有 cover 铺满图，没有就露出渐变底 */
+.r-cover {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+  margin-right: 20rpx;
+}
+
+.r-name {
+  font-size: 29rpx;
+  font-weight: 600;
+}
+
+.r-meta {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: var(--text-3);
+}
+
+.r-tags {
+  margin-top: 10rpx;
+  flex-wrap: wrap;
+}
+
+.r-tags .tag {
+  margin-right: 10rpx;
+}
+
+.r-price {
+  flex-shrink: 0;
+  padding-left: 12rpx;
+}
+
+/* ---------- 空结果 ---------- */
+.empty-tip {
+  margin-top: 12rpx;
+  font-size: 23rpx;
+  color: var(--text-3);
+  text-align: center;
+}

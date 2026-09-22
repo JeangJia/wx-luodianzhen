@@ -1,6 +1,8 @@
 /* pages/index/index.wxss */
 .page {
-  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+  /* 底部留白要能容下悬浮购物车（下沿 132rpx + 自身 108rpx = 上沿 240rpx），
+     否则滚到底时它会正好压住最后一张商品卡的「＋」按钮 */
+  padding-bottom: calc(272rpx + env(safe-area-inset-bottom));
 }
 
 /* ---------- 顶部（纯色黛瓦青，避免渐变断层） ---------- */
@@ -106,6 +108,33 @@
 .search-ph {
   font-size: 26rpx;
   color: #9AA1AC;
+}
+
+/* ---------- 吸顶搜索栏 ----------
+ * 滚过 hero 里的搜索框后滑下来停住。底色跟导航栏同为黛瓦青，
+ * 视觉上等于顶部色块往下长了一截，不会出现一条生硬的接缝
+ * ------------------------------------------------------------ */
+.search-fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 30;
+  padding: 16rpx 24rpx;
+  background: var(--primary);
+  /* 收起状态整体移到视口上方，用 transform 而不是改 top，过渡更顺 */
+  transform: translateY(-100%);
+  opacity: 0;
+  /* 收起时不拦截点击，否则顶部一条不可见的区域会把下面的点击吃掉 */
+  pointer-events: none;
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.22s ease;
+}
+
+.search-fixed.is-on {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ---------- 轮播 ---------- */
@@ -825,6 +854,56 @@
 .goods-unit {
   font-size: 21rpx;
   color: var(--text-3);
+}
+
+/* 价格下面一行：规格单位 + 快捷加购，与商城页商品卡保持一致 */
+.goods-act {
+  margin-top: 12rpx;
+}
+
+.add-btn {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 34rpx;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- 悬浮购物车 ----------
+ * 滚到「农产品优选」才浮出，滚回去就收起（由 .is-on 控制）
+ * 位置与商城页那枚一致：抬到自定义 tabBar（100rpx + 安全区）之上再留 32rpx
+ * ------------------------------------------------------------ */
+.float-cart {
+  position: fixed;
+  right: 32rpx;
+  bottom: calc(132rpx + env(safe-area-inset-bottom));
+  width: 108rpx;
+  height: 108rpx;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 10rpx 30rpx rgba(46, 110, 107, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 30;
+  /* 收起态：整体下移 + 透明，加上 .is-on 后向上浮现 */
+  opacity: 0;
+  transform: translateY(60rpx);
+  /* 收起时不拦截点击，否则屏幕右下角会留一块看不见的热区 */
+  pointer-events: none;
+  transition: opacity 0.26s ease,
+              transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.float-cart.is-on {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* ---------- 页脚 ---------- */

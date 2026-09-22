@@ -11,7 +11,8 @@
     "pages/cart/cart",
     "pages/order/confirm",
     "pages/order/list",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "dark",

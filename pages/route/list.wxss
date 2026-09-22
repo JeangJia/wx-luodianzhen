@@ -177,3 +177,13 @@
   color: var(--text-3);
   margin-top: 4rpx;
 }
+
+/* ---------- 底部规划条 ----------
+ * 本页是 tabBar 页面，自定义 tabBar 占「100rpx + 安全区」且 z-index 更高，
+ * 规划条要抬到它上面才不会被盖住；
+ * bottom 里已经带了安全区，padding-bottom 就不能再算一次，否则底部多出一截
+ * ------------------------------------------------------------ */
+.bottom-bar {
+  bottom: calc(100rpx + env(safe-area-inset-bottom));
+  padding-bottom: 16rpx;
+}

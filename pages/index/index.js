@@ -3,6 +3,8 @@ const { spots } = require('../../data/spots')
 const { routes } = require('../../data/routes')
 const { products } = require('../../data/products')
 const { toTagList } = require('../../utils/tagTone')
+const cart = require('../../utils/cart')
+const flyAnim = require('../../utils/fly')
 
 const app = getApp()
 
@@ -129,7 +131,13 @@ Page({
     hotPull: 0,
     hotTailOpacity: 1,
     hotAwake: false,
-    hotLoading: false
+    hotLoading: false,
+    // 吸顶搜索栏是否已展开
+    searchFixed: false,
+    // 右下角悬浮购物车是否已浮出
+    cartFab: false,
+    // 加购抛物线小球（见 utils/fly.js）
+    fly: flyAnim.HIDDEN
   },
 
   onLoad() {
@@ -183,6 +191,87 @@ Page({
       .boundingClientRect()
       .exec(res => {
         if (res[0]) this.hotViewWidth = res[0].width
+      })
+    this.watchSearchBox()
+    this.measureSearchBox()
+    this.watchGoodsSection()
+  },
+
+  onResize() {
+    // 屏幕尺寸变化后搜索框位置会变，重新测一次
+    this.measureSearchBox()
+  },
+
+  onUnload() {
+    if (this.searchObserver) {
+      this.searchObserver.disconnect()
+      this.searchObserver = null
+    }
+    if (this.goodsObserver) {
+      this.goodsObserver.disconnect()
+      this.goodsObserver = null
+    }
+  },
+
+  /* ---------- 吸顶搜索栏：滚过 hero 里的搜索框后滑下来并保持 ---------- */
+
+  /**
+   * 主通道：IntersectionObserver 盯着 hero 里的搜索框，
+   * 它整个滚出视口上方时就让吸顶栏接替。
+   * 比「onPageScroll + 手动量坐标」少两个可能失效的环节，也不受滚动回调频率影响
+   */
+  watchSearchBox() {
+    if (this.searchObserver) return
+    this.searchObserver = wx.createIntersectionObserver(this, { thresholds: [0] })
+    this.searchObserver
+      .relativeToViewport({ top: 0, bottom: 0 })
+      .observe('.search-hero', res => {
+        // 完全离开视口、且在视口上方 → 原搜索框已经滚过去了
+        const passed = res.intersectionRatio === 0 && res.boundingClientRect.top < 0
+        if (passed !== this.data.searchFixed) this.setData({ searchFixed: passed })
+      })
+  },
+
+  /**
+   * 滚到「农产品优选」时浮出右下角购物车，滚回去自动收起。
+   * 同样以视口为参照：那片网格只要有一部分在视口里就浮出，
+   * 完全滚出去（往上滚过它了）就收起
+   */
+  watchGoodsSection() {
+    if (this.goodsObserver) return
+    this.goodsObserver = wx.createIntersectionObserver(this, { thresholds: [0] })
+    this.goodsObserver
+      .relativeToViewport({ top: 0, bottom: 0 })
+      .observe('.goods-grid', res => {
+        const show = res.intersectionRatio > 0
+        if (show !== this.data.cartFab) this.setData({ cartFab: show })
+      })
+  },
+
+  /**
+   * 兜底通道：观察器万一不回调，还能靠滚动距离判定。
+   * 必须先量到位置（searchTrigger）才参与，
+   * 否则它会一直算出 false，把主通道的结果反复顶回去
+   */
+  onPageScroll(e) {
+    this.lastScrollTop = e.scrollTop
+    if (this.searchTrigger === undefined) {
+      // onReady 阶段万一没量到（节点还没布局完），趁首次滚动补量一次，下次滚动就能用
+      this.measureSearchBox()
+      return
+    }
+    const show = e.scrollTop > this.searchTrigger
+    if (show !== this.data.searchFixed) this.setData({ searchFixed: show })
+  },
+
+  measureSearchBox() {
+    wx.createSelectorQuery()
+      .select('.search-hero')
+      .boundingClientRect()
+      .exec(res => {
+        const rect = res[0]
+        if (!rect) return
+        this.searchTrigger = rect.bottom + (this.lastScrollTop || 0)
       })
   },
 
@@ -328,6 +417,11 @@ Page({
     wx.navigateTo({ url: '/pages/cart/cart' })
   },
 
+  // 首页搜索框：跳独立搜索页（景点 / 路线 / 农产品一起搜）
+  goSearch() {
+    wx.navigateTo({ url: '/pages/search/search' })
+  },
+
   goSpotList() {
     wx.switchTab({ url: '/pages/spot/list' })
   },
@@ -350,6 +444,18 @@ Page({
 
   goRouteDetail(e) {
     wx.navigateTo({ url: '/pages/route/detail?id=' + e.currentTarget.dataset.id })
+  },
+
+  // 农产品优选：不进详情页，直接用默认规格加购（与商城页行为一致）
+  addToCart(e) {
+    const product = products.find(item => item.id === e.currentTarget.dataset.id)
+    if (!product) return
+    // 小球先沿抛物线飞到右下角的悬浮购物车，落袋后再真正加购、角标 +1、弹提示
+    flyAnim.throwToCart(this, '.add-btn', e.currentTarget.dataset.index, '.float-cart', () => {
+      cart.add(product, product.specs[0], 1)
+      this.setData({ cartCount: app.refreshCart() })
+      wx.showToast({ title: '已加入购物车', icon: 'none' })
+    })
   },
 
   goProductDetail(e) {

@@ -19,13 +19,30 @@ Page({
   data: {
     filters,
     active: 'all',
-    list: decorate(routes)
+    list: decorate(routes),
+    // 底部规划条的入场动画名（bar-a / bar-b 交替，用来重复触发同一个动画）
+    barAnim: 'bar-a'
   },
 
   onShow() {
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({ selected: 2 })
     }
+    this.playBarIn()
+  },
+
+  /**
+   * 底部规划条从 tabBar 背后整条升上来。
+   * 首次进入靠 data 里的 bar-a 在渲染时自动播；之后再进页面得换成 bar-b ——
+   * 同一个动画名不会重复触发，换名才会重新开始。
+   * 首次不能也换：那样会和渲染时的动画撞上，升到一半又跳回起点重播，看着就是抖
+   */
+  playBarIn() {
+    if (!this.barPlayed) {
+      this.barPlayed = true
+      return
+    }
+    this.setData({ barAnim: this.data.barAnim === 'bar-a' ? 'bar-b' : 'bar-a' })
   },
 
   onFilterTap(e) {

@@ -289,6 +289,75 @@ button::after {
   padding-bottom: calc(180rpx + env(safe-area-inset-bottom));
 }
 
+/* ---------- 底部操作栏入场动画（按需开启） ----------
+ * 只有挂了 .bar-a / .bar-b 的规划条才会播，其他 .bottom-bar 不挂类名，不受影响。
+ *
+ * 为什么不用「先置初始态、下一帧再加 class 走 transition」：
+ * 那套依赖两次 setData 之间真的渲染过一帧，冷启动时会被合并成一次渲染，
+ * 弹层就会"啪"地直接出现在终点，看不到升上来的过程。
+ * 而 animation 的 from 帧就是初始位置，渲染即开始，过程一定完整。
+ *
+ * 位移用 100%（自身高度）而不是写死像素，改高度不用同步改这里。
+ * bar-a / bar-b 是同一套关键帧的两个名字：同名动画不会重复触发，
+ * 交替名字才能在每次进页面时都重新播一遍。
+ * ------------------------------------------------------------ */
+.bottom-bar.bar-a {
+  animation: barUpA 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.bottom-bar.bar-b {
+  animation: barUpB 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes barUpA {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes barUpB {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+/* ---------- 加购抛物线动画的小球 ----------
+ * 结构：.fly-wrap（定位在起点，只做横向位移）
+ *         └ .fly-inner（只做纵向位移，缓动带负控制点 → 先上飘再落下）
+ *              └ .fly-dot（小球本体）
+ * 两个方向的位移合成起来就是抛物线。位移量由 JS 写成行内 style，CSS 不写死像素。
+ * 时长要和 utils/fly.js 里的 DURATION 保持一致。
+ * ------------------------------------------------------------ */
+.fly-wrap {
+  position: fixed;
+  left: 0;
+  top: 0;
+  /* 零尺寸的点，小球靠负 margin 居中在这一点上 */
+  width: 0;
+  height: 0;
+  z-index: 900;
+  display: none;
+  pointer-events: none;
+  transition: transform 0.62s linear;
+}
+
+.fly-wrap.is-show {
+  display: block;
+}
+
+.fly-inner {
+  transition: transform 0.62s cubic-bezier(0.3, -0.45, 0.7, 1);
+}
+
+.fly-dot {
+  position: absolute;
+  left: -14rpx;
+  top: -14rpx;
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 8rpx rgba(46, 110, 107, 0.16);
+}
+
 /* ---------- 卡片点击反馈 ---------- */
 /* 用法：<view class="card" hover-class="card-press" hover-stay-time="60"> */
 .card-press {

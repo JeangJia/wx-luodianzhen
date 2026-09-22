@@ -1,0 +1,95 @@
+<!--pages/search/search.wxml-->
+<view class="page">
+
+  <!-- 顶部搜索栏 -->
+  <view class="search-wrap">
+    <view class="search">
+      <view class="ic ic-sm ic--search search-ico"></view>
+      <input
+        class="search-input"
+        value="{{keyword}}"
+        placeholder="搜索景点、路线、农产品"
+        placeholder-class="search-ph"
+        focus="{{autoFocus}}"
+        confirm-type="search"
+        bindinput="onKeywordInput"
+        bindconfirm="onSearch"
+      />
+      <view class="ic ic-sm ic--close search-clear" wx:if="{{keyword}}" bindtap="clearKeyword"></view>
+    </view>
+    <view class="search-cancel" bindtap="goBack">取消</view>
+  </view>
+
+  <!-- 没输入：热门搜索 -->
+  <block wx:if="{{!keyword}}">
+    <view class="sec">
+      <view class="sec-t">热门搜索</view>
+    </view>
+    <view class="wrap">
+      <view class="hot-tags">
+        <view
+          class="hot-tag"
+          wx:for="{{hots}}"
+          wx:key="*this"
+          bindtap="onHotTap"
+          data-key="{{item}}"
+        >{{item}}</view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 有输入：分组结果 -->
+  <block wx:else>
+    <view class="count wrap">找到 {{total}} 条与“{{keyword}}”相关的内容</view>
+
+    <view class="empty" wx:if="{{total === 0}}">
+      <view class="ic ic-xl ic--compass empty-icon"></view>
+      <view>没有找到相关内容</view>
+      <view class="empty-tip">换个词试试，比如“龙船”“美兰湖”“天花玉露霜”</view>
+    </view>
+
+    <view class="group" wx:for="{{groups}}" wx:for-item="group" wx:key="key">
+      <block wx:if="{{group.items.length}}">
+        <view class="sec">
+          <view class="sec-t">{{group.name}}</view>
+          <view class="sec-more">{{group.items.length}} 条</view>
+        </view>
+
+        <view class="wrap">
+          <view
+            class="r-item card"
+            wx:for="{{group.items}}"
+            wx:for-item="item"
+            wx:key="id"
+            bindtap="goDetail"
+            data-type="{{group.key}}"
+            data-id="{{item.id}}"
+            hover-class="card-press"
+            hover-stay-time="60"
+          >
+            <view class="r-cover ph ph-{{item.theme}} thumb">
+              <image wx:if="{{item.cover}}" class="thumb-img" src="{{item.cover}}" mode="aspectFill" />
+            </view>
+
+            <view class="r-body flex1">
+              <view class="r-name ellipsis">{{item.name}}</view>
+              <view class="r-meta ellipsis">{{item.meta}}</view>
+              <view class="r-tags row" wx:if="{{item.tagList.length}}">
+                <text
+                  class="tag tag-{{t.tone}}"
+                  wx:for="{{item.tagList}}"
+                  wx:for-item="t"
+                  wx:key="text"
+                >{{t.text}}</text>
+              </view>
+            </view>
+
+            <view class="r-price" wx:if="{{item.price}}">
+              <view class="price"><text class="price-sym">¥</text><text class="price-num">{{item.price}}</text></view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+</view>

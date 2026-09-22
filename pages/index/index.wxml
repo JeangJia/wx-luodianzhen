@@ -14,7 +14,15 @@
       </view>
     </view>
 
-    <view class="search" bindtap="goSpotList">
+    <view class="search search-hero" bindtap="goSearch">
+      <view class="ic ic-sm ic--search search-ico"></view>
+      <text class="search-ph">搜索景点 / 路线 / 农产品</text>
+    </view>
+  </view>
+
+  <!-- 吸顶搜索栏：滚过上面那个搜索框后，从导航栏底下滑下来并保持 -->
+  <view class="search-fixed {{searchFixed ? 'is-on' : ''}}" bindtap="goSearch">
+    <view class="search">
       <view class="ic ic-sm ic--search search-ico"></view>
       <text class="search-ph">搜索景点 / 路线 / 农产品</text>
     </view>
@@ -226,7 +234,8 @@
     <view class="sec-t">农产品优选</view>
     <view class="sec-more" bindtap="goProductList">进入商城 ›</view>
   </view>
-  <view class="wrap grid">
+  <!-- goods-grid 是给 IntersectionObserver 用的专门目标，与 .grid 的网格布局无关 -->
+  <view class="wrap grid goods-grid">
     <view
       class="goods card"
       wx:for="{{hotProducts}}"
@@ -241,14 +250,42 @@
         <view class="goods-name ellipsis">{{item.name}}</view>
         <view class="goods-tag ellipsis">{{item.tags[0]}}</view>
         <view class="row between goods-foot">
-          <view class="price"><text class="price-sym">¥</text><text class="price-num">{{item.price}}</text></view>
+          <view class="price">
+            <text class="price-sym">¥</text><text class="price-num">{{item.price}}</text>
+            <text class="price-old" wx:if="{{item.originPrice}}">¥{{item.originPrice}}</text>
+          </view>
+        </view>
+        <view class="row between goods-act">
           <text class="goods-unit">{{item.unit}}</text>
+          <!-- catchtap：拦住冒泡，否则会连带触发整张卡片的跳详情 -->
+          <view
+            class="add-btn"
+            catchtap="addToCart"
+            data-id="{{item.id}}"
+            data-index="{{index}}"
+          >＋</view>
         </view>
       </view>
     </view>
   </view>
 
   <view class="footer">罗店镇文旅 · 农产品服务平台</view>
+
+  <!-- 悬浮购物车：滚到农产品优选才从下往上浮出，滚回去向下淡出 -->
+  <view class="float-cart {{cartFab ? 'is-on' : ''}}" bindtap="goCart">
+    <view class="ic ic-md ic--basket"></view>
+    <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+  </view>
+
+  <!-- 加购抛物线小球：位置与位移由 utils/fly.js 写成行内样式 -->
+  <view
+    class="fly-wrap {{fly.show ? 'is-show' : ''}}"
+    style="left: {{fly.x}}px; top: {{fly.y}}px; transform: translate3d({{fly.dx}}px, 0, 0)"
+  >
+    <view class="fly-inner" style="transform: translateY({{fly.dy}}px)">
+      <view class="fly-dot"></view>
+    </view>
+  </view>
 </view>
 
 <!-- 进入景点列表的 loading 过渡层：与景点页顶部同为黛瓦青，切换时不断层 -->

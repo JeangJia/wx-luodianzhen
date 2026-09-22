@@ -121,7 +121,7 @@
   <view class="bottom-bar">
     <!-- 左侧：购物车、客服，贴左边 -->
     <view class="bar-icons">
-      <view class="bar-btn" bindtap="goCart">
+      <view class="bar-btn fly-to" bindtap="goCart">
         <view class="ic ic-sm ic--basket bar-ico"></view>
         <text class="bar-txt">购物车</text>
         <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
@@ -134,8 +134,18 @@
 
     <!-- 右侧：加购、购买，贴右边 -->
     <view class="bar-acts">
-      <view class="btn btn-plain" bindtap="addToCart">加入购物车</view>
+      <view class="btn btn-plain fly-from" bindtap="addToCart">加入购物车</view>
       <view class="btn btn-primary" bindtap="buyNow">立即购买</view>
+    </view>
+  </view>
+
+  <!-- 加购抛物线小球：位置与位移由 utils/fly.js 写成行内样式 -->
+  <view
+    class="fly-wrap {{fly.show ? 'is-show' : ''}}"
+    style="left: {{fly.x}}px; top: {{fly.y}}px; transform: translate3d({{fly.dx}}px, 0, 0)"
+  >
+    <view class="fly-inner" style="transform: translateY({{fly.dy}}px)">
+      <view class="fly-dot"></view>
     </view>
   </view>
 </view>

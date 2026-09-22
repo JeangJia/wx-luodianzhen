@@ -38,10 +38,12 @@
         </view>
       </view>
 
-      <view class="order-info">
+      <view class="order-info" bindtap="openAddressEdit" data-id="{{item.id}}">
         <view class="info-line">
           <text class="info-k">收货人</text>
           <text class="info-v flex1">{{item.address.name}} {{item.address.phone}}</text>
+          <!-- 只有还没收货的订单能改 -->
+          <text class="info-edit" wx:if="{{item.canEdit}}">修改 ›</text>
         </view>
         <view class="info-line">
           <text class="info-k">收货地址</text>
@@ -98,4 +100,60 @@
       <view class="btn btn-primary" style="margin-top: 40rpx;" bindtap="goShopping">去逛逛农产品</view>
     </view>
   </view>
+
+  <!-- 收货信息编辑弹层：用 wx:if 而不是只改透明度，
+       否则隐藏时 textarea 这类原生组件可能还留在屏幕上 -->
+  <block wx:if="{{editShow}}">
+    <view class="sheet-mask" bindtap="closeAddressEdit"></view>
+    <view class="sheet">
+      <view class="sheet-head">
+        <text class="sheet-title">修改收货信息</text>
+        <view class="ic ic-sm ic--close" bindtap="closeAddressEdit"></view>
+      </view>
+
+      <view class="field">
+        <text class="field-k">收货人</text>
+        <input
+          class="field-input"
+          value="{{editName}}"
+          data-field="editName"
+          placeholder="请输入姓名"
+          placeholder-class="field-ph"
+          bindinput="onAddrInput"
+        />
+      </view>
+
+      <view class="field">
+        <text class="field-k">手机号</text>
+        <input
+          class="field-input"
+          value="{{editPhone}}"
+          data-field="editPhone"
+          type="number"
+          maxlength="11"
+          placeholder="用于接收发货通知"
+          placeholder-class="field-ph"
+          bindinput="onAddrInput"
+        />
+      </view>
+
+      <view class="field field-last">
+        <text class="field-k">收货地址</text>
+        <textarea
+          class="field-textarea"
+          value="{{editDetail}}"
+          data-field="editDetail"
+          placeholder="省 / 市 / 县 / 乡镇 / 详细地址"
+          placeholder-class="field-ph"
+          maxlength="120"
+          auto-height
+          bindinput="onAddrInput"
+        />
+      </view>
+
+      <view class="sheet-ft">
+        <view class="btn btn-primary sheet-save" bindtap="saveAddress">保存</view>
+      </view>
+    </view>
+  </block>
 </view>

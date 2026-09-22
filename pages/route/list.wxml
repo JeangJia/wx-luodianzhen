@@ -63,7 +63,7 @@
     </view>
   </view>
 
-  <view class="bottom-bar">
+  <view class="bottom-bar {{barAnim}}">
     <view class="bar-info flex1">
       <view class="bar-info-t">想要不一样的行程？</view>
       <view class="bar-info-s">选择景点，自动排出时间表</view>

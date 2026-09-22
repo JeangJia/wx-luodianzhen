@@ -7,6 +7,10 @@
   z-index: 999;
   display: flex;
   align-items: stretch;
+  /* 显式声明 content-box：自定义组件默认不受 app.wxss 里 view{box-sizing:border-box} 影响，
+     这里写清楚，保证总高恒为「100rpx + 安全区 + 1rpx 上边框」。
+     各页面的底部操作栏按「100rpx + 安全区」让位，才能和它严丝合缝不留缝 */
+  box-sizing: content-box;
   height: 100rpx;
   padding-bottom: env(safe-area-inset-bottom);
   background: #FFFFFF;

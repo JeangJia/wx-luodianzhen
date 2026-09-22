@@ -2,6 +2,7 @@
 const { products, getProductById } = require('../../data/products')
 const { spots } = require('../../data/spots')
 const cart = require('../../utils/cart')
+const flyAnim = require('../../utils/fly')
 
 const app = getApp()
 
@@ -12,7 +13,9 @@ Page({
     qty: 1,
     cartCount: 0,
     relatedSpots: [],
-    recommend: []
+    recommend: [],
+    // 加购抛物线小球（见 utils/fly.js）
+    fly: flyAnim.HIDDEN
   },
 
   onLoad(options) {
@@ -56,9 +59,12 @@ Page({
 
   addToCart() {
     const { product, qty } = this.data
-    cart.add(product, this.currentSpec(), qty)
-    this.setData({ cartCount: app.refreshCart() })
-    wx.showToast({ title: '已加入购物车', icon: 'none' })
+    // 小球先沿抛物线飞到左下角的购物车，落袋后再真正加购、角标 +1、弹提示
+    flyAnim.throwToCart(this, '.fly-from', 0, '.fly-to', () => {
+      cart.add(product, this.currentSpec(), qty)
+      this.setData({ cartCount: app.refreshCart() })
+      wx.showToast({ title: '已加入购物车', icon: 'none' })
+    })
   },
 
   buyNow() {

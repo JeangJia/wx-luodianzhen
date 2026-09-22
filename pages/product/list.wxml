@@ -64,7 +64,12 @@
           </view>
           <view class="row between goods-act">
             <text class="goods-unit">{{item.unit}}</text>
-            <view class="add-btn" catchtap="addToCart" data-id="{{item.id}}">＋</view>
+            <view
+              class="add-btn"
+              catchtap="addToCart"
+              data-id="{{item.id}}"
+              data-index="{{index}}"
+            >＋</view>
           </view>
         </view>
       </view>
@@ -79,5 +84,15 @@
   <view class="float-cart" bindtap="goCart">
     <view class="ic ic-md ic--basket float-ico"></view>
     <view class="badge" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+  </view>
+
+  <!-- 加购抛物线小球：位置与位移由 utils/fly.js 写成行内样式 -->
+  <view
+    class="fly-wrap {{fly.show ? 'is-show' : ''}}"
+    style="left: {{fly.x}}px; top: {{fly.y}}px; transform: translate3d({{fly.dx}}px, 0, 0)"
+  >
+    <view class="fly-inner" style="transform: translateY({{fly.dy}}px)">
+      <view class="fly-dot"></view>
+    </view>
   </view>
 </view>

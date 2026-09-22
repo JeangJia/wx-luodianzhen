@@ -68,7 +68,7 @@
     </view>
   </view>
 
-  <view class="bottom-bar">
+  <view class="bottom-bar {{barAnim}}">
     <view class="plan-tip flex1">
       <view class="plan-tip-t">行程还没定？</view>
       <view class="plan-tip-s">按天数和偏好自动生成路线</view>

@@ -16,7 +16,13 @@ Page({
     // tab 滑动下划线
     lineWidth: 0,
     lineLeft: 0,
-    lineReady: false
+    lineReady: false,
+    // 收货信息编辑弹层
+    editShow: false,
+    editId: '',
+    editName: '',
+    editPhone: '',
+    editDetail: ''
   },
 
   onLoad(options) {
@@ -87,10 +93,56 @@ Page({
 
   refresh() {
     const all = order.getOrders()
-    const list = this.data.active === 'all'
+    const list = (this.data.active === 'all'
       ? all
       : all.filter(item => item.status === this.data.active)
+    // canEdit 预先算好，WXML 里直接绑定，省得在模板里写状态判断
+    ).map(item => Object.assign({}, item, {
+      canEdit: item.status === 'unpaid' || item.status === 'paid'
+    }))
     this.setData({ list })
+  },
+
+  /* ---------- 修改收货信息 ---------- */
+
+  openAddressEdit(e) {
+    const item = this.data.list.find(o => o.id === e.currentTarget.dataset.id)
+    if (!item) return
+    if (!item.canEdit) {
+      wx.showToast({ title: '当前状态不可修改收货信息', icon: 'none' })
+      return
+    }
+    const addr = item.address || {}
+    this.setData({
+      editShow: true,
+      editId: item.id,
+      editName: addr.name || '',
+      editPhone: addr.phone || '',
+      editDetail: addr.detail || ''
+    })
+  },
+
+  closeAddressEdit() {
+    this.setData({ editShow: false })
+  },
+
+  onAddrInput(e) {
+    this.setData({ [e.currentTarget.dataset.field]: e.detail.value })
+  },
+
+  saveAddress() {
+    const name = this.data.editName.trim()
+    const phone = this.data.editPhone.trim()
+    const detail = this.data.editDetail.trim()
+
+    if (!name) return wx.showToast({ title: '请填写收货人', icon: 'none' })
+    if (!/^1\d{10}$/.test(phone)) return wx.showToast({ title: '请填写 11 位手机号', icon: 'none' })
+    if (!detail) return wx.showToast({ title: '请填写收货地址', icon: 'none' })
+
+    order.updateAddress(this.data.editId, { name, phone, detail })
+    this.setData({ editShow: false })
+    this.refresh()
+    wx.showToast({ title: '收货信息已更新', icon: 'none' })
   },
 
   pay(e) {
